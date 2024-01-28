@@ -16,6 +16,10 @@ public static class SceneLoader
         {
             Debug.LogError($"Invalid scene index: {sceneIndex}");
         }
+
     }
+
+
+
 }
 
