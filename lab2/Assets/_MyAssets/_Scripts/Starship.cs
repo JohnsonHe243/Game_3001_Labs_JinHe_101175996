@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class StarShip : AgentObject
@@ -28,7 +29,12 @@ public class StarShip : AgentObject
         {
             //Seek();
             SeekForward();
-        } 
+        }
+       
+       if (TargetPosition == null)
+        {
+            ResetSeek();
+        }
     }
 
     private void Seek()
@@ -60,5 +66,10 @@ public class StarShip : AgentObject
 
         // Move along the forward vector using Rigidbody2D.
         rb.velocity = transform.up * movementSpeed;
+    }
+
+    private void ResetSeek()
+    {
+        rb.velocity = Vector2.zero;
     }
 }
