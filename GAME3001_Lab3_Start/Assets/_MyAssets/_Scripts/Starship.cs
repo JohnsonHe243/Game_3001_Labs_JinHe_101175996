@@ -8,7 +8,7 @@ public class Starship : AgentObject
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
     // Add fields for whisper length, angle and avoidance weight.
-    //
+    [SerializeField] float whiskerLength = 1.0f;
     //
     //
     private Rigidbody2D rb;
@@ -48,6 +48,32 @@ public class Starship : AgentObject
         //
         //
         //
+    }
+
+    private bool CastWhisker(float angle)
+    {
+
+        Color rayColor = Color.red;
+        bool hitResult = false;
+        // Cast whiskers to detect obstacles.
+
+
+        // Calculate the direction of the whisker
+        Vector2 whiskerDirection = Quaternion.Euler(0, 0, angle) * transform.up;
+
+        // Cast a ray in the whisker direction;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, whiskerDirection, whiskerLength);
+
+        // Check if the ray hits an obstacle
+        if (hit.collider != null)
+        {
+            Debug.Log("Obstacle Detected!!!");
+
+            rayColor = Color.green;
+            hitResult = true;
+        }
+        Debug.DrawRay(transform.position, whiskerDirection * whiskerLength, rayColor);
+        return hitResult;
     }
 
     private void RotateCounterClockwise()
