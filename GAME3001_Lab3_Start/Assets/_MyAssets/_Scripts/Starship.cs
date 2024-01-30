@@ -10,7 +10,7 @@ public class Starship : AgentObject
     // Add fields for whisper length, angle and avoidance weight.
     [SerializeField] float whiskerLength = 1.0f;
     [SerializeField] float frontWhiskerAngle = 0f;
-    //
+    [SerializeField] float avoidanceWeight = 2f;
     private Rigidbody2D rb;
 
     new void Start() // Note the new.
