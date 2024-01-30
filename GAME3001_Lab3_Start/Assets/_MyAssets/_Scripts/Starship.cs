@@ -8,8 +8,8 @@ public class Starship : AgentObject
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
     // Add fields for whisper length, angle and avoidance weight.
-    [SerializeField] float whiskerLength = 1.0f;
-    [SerializeField] float frontWhiskerAngle = 0f;
+    [SerializeField] float whiskerLength = 1.5f;
+    [SerializeField] float frontWhiskerAngle = 45f;
     [SerializeField] float avoidanceWeight = 2f;
     private Rigidbody2D rb;
 
@@ -69,6 +69,7 @@ public class Starship : AgentObject
         Color rayColor = Color.red;
         bool hitResult = false;
         // Cast whiskers to detect obstacles.
+        
 
 
         // Calculate the direction of the whisker
