@@ -27,7 +27,7 @@ public class Starship : AgentObject
             // Seek();
             SeekForward();
             // Add call to AvoidObstacles.
-            //
+            AvoidObstacles();
         }
     }
 
@@ -50,19 +50,18 @@ public class Starship : AgentObject
 
     }
 
-
-
-    private void RotateCounterClockwise()
-    {
-        // Rotate counterclockwise based on rotationSpeed and a weight.
-        // 
-    }
-
     private void RotateClockwise()
     {
         // Rotate clockwise based on rotationSpeed and a weight.
-        // 
+        transform.Rotate(Vector3.forward, rotationSpeed * avoidanceWeight * Time.deltaTime);
     }
+    private void RotateCounterClockwise()
+    {
+        // Rotate counterclockwise based on rotationSpeed and a weight.
+        transform.Rotate(Vector3.forward, -rotationSpeed * avoidanceWeight * Time.deltaTime);
+    }
+
+
 
     private bool CastWhisker(float angle)
     {
