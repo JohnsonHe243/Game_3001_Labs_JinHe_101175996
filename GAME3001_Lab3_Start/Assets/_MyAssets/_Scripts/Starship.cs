@@ -9,7 +9,7 @@ public class Starship : AgentObject
     [SerializeField] float rotationSpeed;
     // Add fields for whisper length, angle and avoidance weight.
     [SerializeField] float whiskerLength = 1.0f;
-    //
+    [SerializeField] float frontWhiskerAngle = 0f;
     //
     private Rigidbody2D rb;
 
@@ -33,21 +33,35 @@ public class Starship : AgentObject
 
     private void AvoidObstacles()
     {
-        // Cast whiskers to detect obstacles.
-        //
-        //
+        bool hitleft = CastWhisker(frontWhiskerAngle);
+        bool hitright = CastWhisker(-frontWhiskerAngle);
 
         // Adjust rotation based on detected obstacles.
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
+        if (hitleft)
+        {
+            // Rotate clockwise if the left whisker is hit
+            RotateClockwise();
+        }
+        else if (hitright & !hitleft)
+        {
+            // Rotate counterclockwise if the right whisker hit
+            RotateCounterClockwise();
+        }
+
+    }
+
+
+
+    private void RotateCounterClockwise()
+    {
+        // Rotate counterclockwise based on rotationSpeed and a weight.
+        // 
+    }
+
+    private void RotateClockwise()
+    {
+        // Rotate clockwise based on rotationSpeed and a weight.
+        // 
     }
 
     private bool CastWhisker(float angle)
@@ -75,24 +89,6 @@ public class Starship : AgentObject
         Debug.DrawRay(transform.position, whiskerDirection * whiskerLength, rayColor);
         return hitResult;
     }
-
-    private void RotateCounterClockwise()
-    {
-        // Rotate counterclockwise based on rotationSpeed and a weight.
-        // 
-    }
-
-    private void RotateClockwise()
-    {
-        // Rotate clockwise based on rotationSpeed and a weight.
-        // 
-    }
-
-    // Add CastWhisker method. I removed it entirely.
-    //
-    //
-    //
-    //
 
     private void SeekForward() // A seek with rotation to target but only moving along forward vector.
     {
