@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class BlueGuy : AgentObject
     [SerializeField] float frontWhiskerAngle = 45f;
     [SerializeField] float avoidanceWeight = 2f;
     private Rigidbody2D rb;
+    private Vector2 positionA;
+    private Vector2 positionT;
 
 
     new void Start() // Note the new.
@@ -25,27 +28,27 @@ public class BlueGuy : AgentObject
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             // Instantiate targetSprite
-            Vector3 positionT = new Vector3(6f, 1f, 0);
+            positionT = new Vector2(6f, 1f);
             Instantiate(targetSprite, positionT, Quaternion.identity);
 
             // Parent
-            GameObject parent = new GameObject("Parent");
+            GameObject parent = GameObject.Find("Parent");
 
             // Instantiate agentSprite
-            Vector3 parentPosition = new Vector3(1.0f, 2.0f, 3.0f);
+            Vector3 parentPosition = new Vector2(-6.5f, -2.5f); ;
             parent.transform.position = parentPosition;
-            Vector3 positionA = new Vector3(-6.5f, -2.5f, 0);
+            positionA = parentPosition;
             GameObject agent = Instantiate(agentSprite, positionA, Quaternion.identity);
 
             // Set the parent for agent
             agent.transform.parent = parent.transform;
 
-            SeekForward();
+            Seek();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         { 
@@ -63,7 +66,7 @@ public class BlueGuy : AgentObject
         }
         else if(!Input.GetKeyDown(KeyCode.Alpha5))
         {
-            SeekForward();
+            Seek();
             AvoidObstacles();
         }
     }
@@ -127,39 +130,30 @@ public class BlueGuy : AgentObject
         return hitResult;
     }
 
-    private void SeekForward() // A seek with rotation to target but only moving along forward vector.
-    {
-        // Calculate direction to the target.
-        Vector2 directionToTarget = (TargetPosition - transform.position).normalized;
+    private void Seek()
+{
+    // Update positions based on GameObjects' actual positions
+    Vector2 positionA = transform.position;
+    Vector2 positionT = GameObject.Find("Target(Clone)").transform.position;
 
-        // Calculate the angle to rotate towards the target.
-        float targetAngle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 90.0f; // Note the +90 when converting from Radians.
+    // Calculate direction to the target.
+    Vector2 directionToTarget = (positionT - positionA).normalized;
 
-        // Smoothly rotate towards the target.
-        float angleDifference = Mathf.DeltaAngle(targetAngle, transform.eulerAngles.z);
-        float rotationStep = rotationSpeed * Time.deltaTime;
-        float rotationAmount = Mathf.Clamp(angleDifference, -rotationStep, rotationStep);
-        transform.Rotate(Vector3.forward, rotationAmount);
+    // Calculate the angle to rotate towards the target.
+    float targetAngle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg - 90.0f;
 
-        // Move along the forward vector using Rigidbody2D.
-        rb.velocity = transform.up * movementSpeed;
-    }
+    // Smoothly rotate towards the target.
+    float angleDifference = Mathf.DeltaAngle(targetAngle, transform.eulerAngles.z);
+    float rotationStep = rotationSpeed * Time.deltaTime;
+    float rotationAmount = Mathf.Clamp(angleDifference, -rotationStep, rotationStep);
+    transform.Rotate(Vector3.forward, rotationAmount);
+
+    // Move directly towards the target using Rigidbody2D.
+    rb.velocity = directionToTarget * movementSpeed;
+}
     private void Flee()
     {
-        // Calculate direction to the target.
-        Vector2 directionToTarget = (transform.position - TargetPosition).normalized;
 
-        // Calculate the angle to rotate towards the target.
-        float targetAngle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 90.0f; // Note the +90 when converting from Radians.
-
-        // Smoothly rotate towards the target.
-        float angleDifference = Mathf.DeltaAngle(targetAngle, transform.eulerAngles.z);
-        float rotationStep = rotationSpeed * Time.deltaTime;
-        float rotationAmount = Mathf.Clamp(angleDifference, -rotationStep, rotationStep);
-        transform.Rotate(Vector3.forward, rotationAmount);
-
-        // Move along the forward vector using Rigidbody2D.
-        rb.velocity = transform.up * movementSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

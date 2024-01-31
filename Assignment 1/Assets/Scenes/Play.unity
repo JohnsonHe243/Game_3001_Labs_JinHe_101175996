@@ -237,7 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55b97a65ecf257144adc752d2444c760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSprite: {fileID: 8399067060930008944, guid: d50f76dbb03231f428c4893cb259c1b9, type: 3}
 --- !u!1 &386868884
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,8 +343,8 @@ MonoBehaviour:
   m_target: {fileID: 954515525958709293, guid: d50f76dbb03231f428c4893cb259c1b9, type: 3}
   agentSprite: {fileID: 2249112977613344764, guid: 5f53934506aca73459a95df667c58410, type: 3}
   targetSprite: {fileID: 8399067060930008944, guid: d50f76dbb03231f428c4893cb259c1b9, type: 3}
-  movementSpeed: 0
-  rotationSpeed: 0
+  movementSpeed: 3
+  rotationSpeed: 200
   whiskerLength: 1.5
   frontWhiskerAngle: 45
   avoidanceWeight: 2
