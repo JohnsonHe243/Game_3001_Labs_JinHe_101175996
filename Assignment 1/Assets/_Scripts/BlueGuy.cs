@@ -7,6 +7,7 @@ using UnityEngine;
 public class BlueGuy : AgentObject
 {
     public GameObject agentSprite;
+    public GameObject targetSprite;
 
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
@@ -15,6 +16,7 @@ public class BlueGuy : AgentObject
     [SerializeField] float frontWhiskerAngle = 45f;
     [SerializeField] float avoidanceWeight = 2f;
     private Rigidbody2D rb;
+
 
     new void Start() // Note the new.
     {
@@ -25,30 +27,41 @@ public class BlueGuy : AgentObject
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && TargetPosition != null)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Vector3 spawnPositionA = new Vector3(-6.5f, -2.5f, 0);
-            transform.parent.position = spawnPositionA;
-            GameObject newObject = Instantiate(agentSprite, spawnPositionA, Quaternion.identity);
-            newObject.transform.parent = transform.parent;
-            // Seek();
+            // Instantiate targetSprite
+            Vector3 positionT = new Vector3(6f, 1f, 0);
+            Instantiate(targetSprite, positionT, Quaternion.identity);
+
+            // Parent
+            GameObject parent = new GameObject("Parent");
+
+            // Instantiate agentSprite
+            Vector3 parentPosition = new Vector3(1.0f, 2.0f, 3.0f);
+            parent.transform.position = parentPosition;
+            Vector3 positionA = new Vector3(-6.5f, -2.5f, 0);
+            GameObject agent = Instantiate(agentSprite, positionA, Quaternion.identity);
+
+            // Set the parent for agent
+            agent.transform.parent = parent.transform;
+
             SeekForward();
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && TargetPosition != null)
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         { 
 
             // Flee();
             Flee();
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha3) && TargetPosition != null)
+        else if(Input.GetKeyDown(KeyCode.Alpha3))
         {
 
         }
-        else if(!Input.GetKeyDown(KeyCode.Alpha4) && TargetPosition != null)
+        else if(!Input.GetKeyDown(KeyCode.Alpha4))
         {
 
         }
-        else if(!Input.GetKeyDown(KeyCode.Alpha5) && TargetPosition != null)
+        else if(!Input.GetKeyDown(KeyCode.Alpha5))
         {
             SeekForward();
             AvoidObstacles();
