@@ -10,6 +10,7 @@ public class Starship : AgentObject
     // Add fields for whisper length, angle and avoidance weight.
     [SerializeField] float whiskerLength = 1.5f;
     [SerializeField] float frontWhiskerAngle = 45f;
+    [SerializeField] float backWhiskerAngle = 135f;
     [SerializeField] float avoidanceWeight = 2f;
     private Rigidbody2D rb;
 
@@ -35,6 +36,8 @@ public class Starship : AgentObject
     {
         bool hitleft = CastWhisker(frontWhiskerAngle);
         bool hitright = CastWhisker(-frontWhiskerAngle);
+        bool hitBackLeft = CastWhisker(backWhiskerAngle);
+        bool hitBackRight = CastWhisker(-backWhiskerAngle);
 
         // Adjust rotation based on detected obstacles.
         if (hitleft)
@@ -47,30 +50,38 @@ public class Starship : AgentObject
             // Rotate counterclockwise if the right whisker hit
             RotateCounterClockwise();
         }
+        // Adjust rotation based on detected obstacles.
+        if (hitBackLeft)
+        {
+            // Rotate clockwise if the left whisker is hit
+            RotateClockwise();
+        }
+        else if (hitBackRight & !hitBackLeft)
+        {
+            // Rotate counterclockwise if the right whisker hit
+            RotateCounterClockwise();
+        }
 
     }
 
     private void RotateClockwise()
     {
         // Rotate clockwise based on rotationSpeed and a weight.
-        transform.Rotate(Vector3.forward, rotationSpeed * avoidanceWeight * Time.deltaTime);
+        transform.Rotate(Vector3.forward, -rotationSpeed * avoidanceWeight * Time.deltaTime);
     }
     private void RotateCounterClockwise()
     {
         // Rotate counterclockwise based on rotationSpeed and a weight.
-        transform.Rotate(Vector3.forward, -rotationSpeed * avoidanceWeight * Time.deltaTime);
+        transform.Rotate(Vector3.forward, rotationSpeed * avoidanceWeight * Time.deltaTime);
     }
 
 
-
+    // Cast whiskers to detect obstacles.
     private bool CastWhisker(float angle)
     {
 
         Color rayColor = Color.red;
         bool hitResult = false;
-        // Cast whiskers to detect obstacles.
-        
-
 
         // Calculate the direction of the whisker
         Vector2 whiskerDirection = Quaternion.Euler(0, 0, angle) * transform.up;
