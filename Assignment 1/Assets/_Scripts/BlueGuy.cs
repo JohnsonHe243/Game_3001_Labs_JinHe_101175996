@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class BlueGuy : AgentObject
 {
-    public GameObject agentSprite;
-    public GameObject targetSprite;
-
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
     // Add fields for whisper length, angle and avoidance weight.
@@ -26,20 +23,13 @@ public class BlueGuy : AgentObject
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha0) && TargetPosition != null)
-        {   
+        if (Input.GetKeyDown(KeyCode.Alpha1) && TargetPosition != null)
+        {
             // Seek();
             SeekForward();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && TargetPosition != null)
-        {
-            // Spawn Agent
-            Vector3 spawnPositionA = new Vector3(-6.5f, -2.5f, 0);
-            Instantiate(agentSprite, spawnPositionA, Quaternion.identity);
-
-            // Spawn Target
-            Vector3 spawnPositionT = new Vector3(6f, 1f, 0);
-            Instantiate(targetSprite, spawnPositionT, Quaternion.identity);
+        { 
 
             // Flee();
             Flee();
