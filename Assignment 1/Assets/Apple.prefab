@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5047113968803282319}
   - component: {fileID: 455484428444938259}
   - component: {fileID: 4012300466798731131}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Apple
   m_TagString: destroy
   m_Icon: {fileID: 0}

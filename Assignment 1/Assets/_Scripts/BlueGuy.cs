@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Starship : AgentObject
+public class BlueGuy : AgentObject
 {
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
@@ -23,12 +23,9 @@ public class Starship : AgentObject
 
     void Update()
     {
-        if (TargetPosition != null)
+        while (GameObject.Find("Apple(Clone)").transform.position == new Vector3(4f, -2.5f, 0f))
         {
-            // Seek();
             SeekForward();
-            // Add call to AvoidObstacles.
-            AvoidObstacles();
         }
     }
 
@@ -84,7 +81,7 @@ public class Starship : AgentObject
         bool hitResult = false;
 
         // Calculate the direction of the whisker
-        Vector2 whiskerDirection = Quaternion.Euler(0, 0, angle) * transform.up;
+        Vector2 whiskerDirection = Quaternion.Euler(0, 0, angle) * transform.right;
 
         // Cast a ray in the whisker direction;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, whiskerDirection, whiskerLength);
@@ -104,10 +101,10 @@ public class Starship : AgentObject
     private void SeekForward() // A seek with rotation to target but only moving along forward vector.
     {
         // Calculate direction to the target.
-        Vector3 directionToTarget = (TargetPosition - transform.position).normalized;
+        Vector2 directionToTarget = (GameObject.Find("Apple(Clone)").transform.position - transform.position).normalized;
 
         // Calculate the angle to rotate towards the target.
-        float targetAngle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 180.0f; // Note the +90 when converting from Radians.
+        float targetAngle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 90.0f; // Note the +90 when converting from Radians.
 
         // Smoothly rotate towards the target.
         float angleDifference = Mathf.DeltaAngle(targetAngle, transform.eulerAngles.z);
@@ -116,7 +113,24 @@ public class Starship : AgentObject
         transform.Rotate(Vector3.forward, rotationAmount);
 
         // Move along the forward vector using Rigidbody2D.
-        rb.velocity = transform.right * movementSpeed;
+        rb.velocity = transform.up * movementSpeed;
+    }
+    private void Flee()
+    {
+        // Calculate direction to the target.
+        Vector2 directionToTarget = (transform.position - TargetPosition).normalized;
+
+        // Calculate the angle to rotate towards the target.
+        float targetAngle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 60.0f; // Note the +90 when converting from Radians.
+
+        // Smoothly rotate towards the target.
+        float angleDifference = Mathf.DeltaAngle(targetAngle, transform.eulerAngles.z);
+        float rotationStep = rotationSpeed * Time.deltaTime;
+        float rotationAmount = Mathf.Clamp(angleDifference, -rotationStep, rotationStep);
+        transform.Rotate(Vector3.forward, rotationAmount);
+
+        // Move along the forward vector using Rigidbody2D.
+        rb.velocity = transform.up * movementSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -128,3 +142,4 @@ public class Starship : AgentObject
         }
     }
 }
+

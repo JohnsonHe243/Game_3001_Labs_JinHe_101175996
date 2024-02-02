@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2249112977613344764}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7, y: 7, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
@@ -173,8 +173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_target: {fileID: 954515525958709293, guid: d50f76dbb03231f428c4893cb259c1b9, type: 3}
   movementSpeed: 2
-  rotationSpeed: 90
-  whiskerLength: 1.5
+  rotationSpeed: 60
+  whiskerLength: 1
   frontWhiskerAngle: 45
   backWhiskerAngle: 135
   avoidanceWeight: 2

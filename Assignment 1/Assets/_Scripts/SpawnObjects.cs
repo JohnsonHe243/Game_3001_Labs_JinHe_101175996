@@ -16,10 +16,10 @@ public class ObjectSpawn : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             // Instantiate apple
-            Instantiate(apple);
+            Instantiate(apple, new Vector2(4f, -2.5f), Quaternion.identity);
 
             // Instantiate blue
-            Instantiate(blue);
+            Instantiate(blue, new Vector2(-10f, 5), Quaternion.identity);
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -28,7 +28,7 @@ public class ObjectSpawn : MonoBehaviour
             Instantiate(apple);
 
             // Instantiate blue
-            Instantiate(blue, new Vector3(5f, -2.5f, 0f), Quaternion.identity);
+            Instantiate(blue, new Vector2(5f, -2.5f), Quaternion.identity);
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -37,7 +37,7 @@ public class ObjectSpawn : MonoBehaviour
             Instantiate(apple);
 
             // Instantiate blue
-            Instantiate(blue);
+            Instantiate(blue, new Vector2(-10f, 6f), Quaternion.identity);
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -45,10 +45,10 @@ public class ObjectSpawn : MonoBehaviour
             // Instantiate apple
             Instantiate(apple);
             // Instantiate mushroom
-            Instantiate(mushroom, new Vector3(0f, -2.5f, 0f), Quaternion.identity);
+            Instantiate(mushroom, new Vector2(0f, -2.5f), Quaternion.identity);
 
             // Instantiate blue
-            Instantiate(blue, new Vector3(-6.5f, -2.5f, 0f), Quaternion.identity);
+            Instantiate(blue, new Vector2(-10f, -2f), Quaternion.identity);
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha5)) // remove from scene 
