@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: -2543389060155897152}
   - component: {fileID: 3680345291543738268}
   - component: {fileID: 405215001188508740}
-  - component: {fileID: -4712138936753908550}
   m_Layer: 2
-  m_Name: Blue
+  m_Name: BlueSeekAvoid
   m_TagString: destroy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,22 +158,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.5, y: 2.5}
   m_EdgeRadius: 0
---- !u!114 &-4712138936753908550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2249112977613344764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78b51df6a61ca0f49a818a0fa2b5dc30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_target: {fileID: 954515525958709293, guid: d50f76dbb03231f428c4893cb259c1b9, type: 3}
-  movementSpeed: 2
-  rotationSpeed: 60
-  whiskerLength: 1
-  frontWhiskerAngle: 45
-  backWhiskerAngle: 135
-  avoidanceWeight: 2

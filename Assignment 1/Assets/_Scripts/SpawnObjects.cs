@@ -7,8 +7,12 @@ using static UnityEngine.GraphicsBuffer;
 
 public class ObjectSpawn : MonoBehaviour
 {
-    public GameObject blue;
+    public GameObject blueSeek;
+    public GameObject blueFlee;
+    public GameObject blueArrive;
+    public GameObject blueSeekAvoid;
     public GameObject mushroom;
+    public GameObject mushroomSmall;
     public GameObject apple;
 
     void Update()
@@ -16,19 +20,19 @@ public class ObjectSpawn : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             // Instantiate apple
-            Instantiate(apple, new Vector2(4f, -2.5f), Quaternion.identity);
+            Instantiate(apple);
 
             // Instantiate blue
-            Instantiate(blue, new Vector2(-10f, 5), Quaternion.identity);
+            Instantiate(blueSeek);
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             // Instantiate apple
-            Instantiate(apple);
+            Instantiate(mushroomSmall);
 
             // Instantiate blue
-            Instantiate(blue, new Vector2(5f, -2.5f), Quaternion.identity);
+            Instantiate(blueFlee);
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -37,7 +41,7 @@ public class ObjectSpawn : MonoBehaviour
             Instantiate(apple);
 
             // Instantiate blue
-            Instantiate(blue, new Vector2(-10f, 6f), Quaternion.identity);
+            Instantiate(blueArrive);
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -45,10 +49,10 @@ public class ObjectSpawn : MonoBehaviour
             // Instantiate apple
             Instantiate(apple);
             // Instantiate mushroom
-            Instantiate(mushroom, new Vector2(0f, -2.5f), Quaternion.identity);
+            Instantiate(mushroom);
 
             // Instantiate blue
-            Instantiate(blue, new Vector2(-10f, -2f), Quaternion.identity);
+            Instantiate(blueSeekAvoid);
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha5)) // remove from scene 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlueGuy : AgentObject
+public class BlueSeekAvoid : AgentObject
 {
     [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
@@ -23,12 +23,12 @@ public class BlueGuy : AgentObject
 
     void Update()
     {
-        while (GameObject.Find("Apple(Clone)").transform.position == new Vector3(4f, -2.5f, 0f))
+        if (TargetPosition != null)
         {
             SeekForward();
+            AvoidObstacles();
         }
     }
-
     private void AvoidObstacles()
     {
         bool hitleft = CastWhisker(frontWhiskerAngle);
@@ -58,7 +58,6 @@ public class BlueGuy : AgentObject
             // Rotate counterclockwise if the right whisker hit
             RotateCounterClockwise();
         }
-
     }
 
     private void RotateClockwise()
@@ -75,8 +74,7 @@ public class BlueGuy : AgentObject
 
     // Cast whiskers to detect obstacles.
     private bool CastWhisker(float angle)
-    {
-
+    { 
         Color rayColor = Color.red;
         bool hitResult = false;
 
@@ -101,27 +99,10 @@ public class BlueGuy : AgentObject
     private void SeekForward() // A seek with rotation to target but only moving along forward vector.
     {
         // Calculate direction to the target.
-        Vector2 directionToTarget = (GameObject.Find("Apple(Clone)").transform.position - transform.position).normalized;
+        Vector2 directionToTarget = (TargetPosition - transform.position).normalized;
 
         // Calculate the angle to rotate towards the target.
         float targetAngle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 90.0f; // Note the +90 when converting from Radians.
-
-        // Smoothly rotate towards the target.
-        float angleDifference = Mathf.DeltaAngle(targetAngle, transform.eulerAngles.z);
-        float rotationStep = rotationSpeed * Time.deltaTime;
-        float rotationAmount = Mathf.Clamp(angleDifference, -rotationStep, rotationStep);
-        transform.Rotate(Vector3.forward, rotationAmount);
-
-        // Move along the forward vector using Rigidbody2D.
-        rb.velocity = transform.up * movementSpeed;
-    }
-    private void Flee()
-    {
-        // Calculate direction to the target.
-        Vector2 directionToTarget = (transform.position - TargetPosition).normalized;
-
-        // Calculate the angle to rotate towards the target.
-        float targetAngle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 60.0f; // Note the +90 when converting from Radians.
 
         // Smoothly rotate towards the target.
         float angleDifference = Mathf.DeltaAngle(targetAngle, transform.eulerAngles.z);

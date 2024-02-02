@@ -548,8 +548,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0194b005ed64d4cbf6baf7584116cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blue: {fileID: 2249112977613344764, guid: 5f53934506aca73459a95df667c58410, type: 3}
+  blueSeek: {fileID: 5554606452906425714, guid: 26146405956dad540900153162ceb97e, type: 3}
+  blueFlee: {fileID: 3112053013404447101, guid: 51b4193b61be0e54aa019234bd53e4ea, type: 3}
+  blueArrive: {fileID: 4812886818372072577, guid: 087d486051fd4a94c8e45c89fc097d3d, type: 3}
+  blueSeekAvoid: {fileID: 0}
   mushroom: {fileID: 8646827608955937760, guid: b03627891be94294d8534e31aa45184d, type: 3}
+  mushroomSmall: {fileID: 2005033897753759799, guid: 4baf45caa0d7c07469f768665d69f41e, type: 3}
   apple: {fileID: 8399067060930008944, guid: d50f76dbb03231f428c4893cb259c1b9, type: 3}
 --- !u!1 &1901083530
 GameObject:
