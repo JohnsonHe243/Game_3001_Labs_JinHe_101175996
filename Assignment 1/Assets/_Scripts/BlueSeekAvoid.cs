@@ -15,7 +15,8 @@ public class BlueSeekAvoid : AgentObject
     private Rigidbody2D rb;
 
     public AudioClip bye;  
-    public AudioClip yay; 
+    public AudioClip yay;
+    public Collider2D other;
 
     private AudioSource audioSource;
 
@@ -24,6 +25,9 @@ public class BlueSeekAvoid : AgentObject
         base.Start(); // Explicitly invoking Start of AgentObject.
         Debug.Log("Starting Starship.");
         rb = GetComponent<Rigidbody2D>();
+
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     void Update()
@@ -84,7 +88,7 @@ public class BlueSeekAvoid : AgentObject
         bool hitResult = false;
 
         // Calculate the direction of the whisker
-        Vector2 whiskerDirection = Quaternion.Euler(0, 0, angle) * transform.right;
+        Vector2 whiskerDirection = Quaternion.Euler(0, 0, angle) * transform.up;
 
         // Cast a ray in the whisker direction;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, whiskerDirection, whiskerLength);
@@ -96,6 +100,11 @@ public class BlueSeekAvoid : AgentObject
 
             rayColor = Color.green;
             hitResult = true;
+
+            if (other.gameObject.tag == "Obstacle")
+            {
+                audioSource.PlayOneShot(bye);
+            }
         }
         Debug.DrawRay(transform.position, whiskerDirection * whiskerLength, rayColor);
         return hitResult;
@@ -121,10 +130,6 @@ public class BlueSeekAvoid : AgentObject
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Obstacle")
-        {
-            audioSource.PlayOneShot(bye);
-        }
         if (other.gameObject.tag == "Target")
         {
             audioSource.PlayOneShot(yay);
