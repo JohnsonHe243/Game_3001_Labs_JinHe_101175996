@@ -16,7 +16,6 @@ public class BlueSeekAvoid : AgentObject
 
     public AudioClip bye;  
     public AudioClip yay;
-    public Collider2D other;
 
     private AudioSource audioSource;
 
@@ -87,6 +86,7 @@ public class BlueSeekAvoid : AgentObject
         Color rayColor = Color.red;
         bool hitResult = false;
 
+
         // Calculate the direction of the whisker
         Vector2 whiskerDirection = Quaternion.Euler(0, 0, angle) * transform.up;
 
@@ -101,10 +101,6 @@ public class BlueSeekAvoid : AgentObject
             rayColor = Color.green;
             hitResult = true;
 
-            if (other.gameObject.tag == "Obstacle")
-            {
-                audioSource.PlayOneShot(bye);
-            }
         }
         Debug.DrawRay(transform.position, whiskerDirection * whiskerLength, rayColor);
         return hitResult;
@@ -133,6 +129,11 @@ public class BlueSeekAvoid : AgentObject
         if (other.gameObject.tag == "Target")
         {
             audioSource.PlayOneShot(yay);
+        }
+
+        if (other.gameObject.tag == "Obstacle")
+        {
+            audioSource.PlayOneShot(bye);
         }
     }
 }
