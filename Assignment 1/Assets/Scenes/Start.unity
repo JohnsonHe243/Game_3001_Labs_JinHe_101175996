@@ -153,13 +153,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b08b0ce6a84b94146a8dde1d2c0bca8e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.259
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 27
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -805,10 +805,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1768345482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 982c7f3f18e0b8d40bf932fdee1892b8, type: 3}
+  m_Script: {fileID: 11500000, guid: df0c4802d4a2ee44eb876315296669f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectMusic: {fileID: 59641079}
 --- !u!4 &1768345484
 Transform:
   m_ObjectHideFlags: 0
@@ -817,7 +816,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768345482}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

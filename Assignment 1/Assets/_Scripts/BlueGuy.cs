@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class BlueGuy : AgentObject
 {
+<<<<<<< Updated upstream:Assignment 1/Assets/_Scripts/BlueGuy.cs
     public GameObject agentSprite;
     public GameObject targetSprite;
 
@@ -16,16 +17,32 @@ public class BlueGuy : AgentObject
     [SerializeField] float whiskerLength = 1.5f;
     [SerializeField] float frontWhiskerAngle = 45f;
     [SerializeField] float avoidanceWeight = 2f;
+=======
+    [SerializeField] float movementSpeed = 3;
+    [SerializeField] float rotationSpeed = 60;
+    // Add fields for whisper length, angle and avoidance weight.
+    [SerializeField] float whiskerLength = 1.5f;
+    [SerializeField] float frontWhiskerAngle = 70f;
+    [SerializeField] float backWhiskerAngle = 110f;
+    [SerializeField] float avoidanceWeight = 3f;
+>>>>>>> Stashed changes:Assignment 1/Assets/_Scripts/BlueSeekAvoid.cs
     private Rigidbody2D rb;
     private Vector2 positionA;
     private Vector2 positionT;
 
+
+    public AudioClip bye;  
+    public AudioClip yay; 
+
+    private AudioSource audioSource;
 
     new void Start() // Note the new.
     {
         base.Start(); // Explicitly invoking Start of AgentObject.
         Debug.Log("Starting Starship.");
         rb = GetComponent<Rigidbody2D>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Update()
@@ -158,10 +175,13 @@ public class BlueGuy : AgentObject
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.tag == "Obstacle")
+        {
+            audioSource.PlayOneShot(bye);
+        }
         if (other.gameObject.tag == "Target")
         {
-            GetComponent<AudioSource>().Play();
-            // What is this!?! Didn't you learn how to create a static sound manager last week in 1017?
+            audioSource.PlayOneShot(yay);
         }
     }
 }

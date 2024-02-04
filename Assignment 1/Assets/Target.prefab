@@ -12,9 +12,15 @@ GameObject:
   - component: {fileID: 5047113968803282319}
   - component: {fileID: 455484428444938259}
   - component: {fileID: 4012300466798731131}
+<<<<<<< Updated upstream:Assignment 1/Assets/Target.prefab
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
+=======
+  m_Layer: 2
+  m_Name: Apple
+  m_TagString: Target
+>>>>>>> Stashed changes:Assignment 1/Assets/Apple.prefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

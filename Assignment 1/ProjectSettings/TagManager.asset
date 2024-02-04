@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameMusic
+  - destroy
+  - Target
+  - Obstacle
   layers:
   - Default
   - TransparentFX
