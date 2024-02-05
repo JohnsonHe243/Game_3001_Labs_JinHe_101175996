@@ -7,8 +7,7 @@ public class StarShip : AgentObject
 {
     // Start is called before the first frame update
     [SerializeField] float movementSpeed = 1.0f;
-
-    [SerializeField] float rotationSpeed = 155.0f;    
+    [SerializeField] float rotationSpeed = 155.0f;
     Rigidbody2D rb;
 
 
@@ -29,24 +28,9 @@ public class StarShip : AgentObject
         {
             //Seek();
             SeekForward();
+
         }
-       
-       if (TargetPosition == null)
-        {
-            ResetSeek();
-        }
-    }
 
-    private void Seek()
-    {
-        // Calculate desired velocity using kinematic see equation.
-        Vector2 desiredVelocity = (TargetPosition - transform.position).normalized * movementSpeed;
-
-        // Calculate the steering force.
-        Vector2 steeringForce = desiredVelocity - rb.velocity;
-
-        //Apply the steering force to the agent.
-        rb.AddForce(steeringForce);
     }
 
     private void SeekForward() // Always move toward while rotate to the target.
