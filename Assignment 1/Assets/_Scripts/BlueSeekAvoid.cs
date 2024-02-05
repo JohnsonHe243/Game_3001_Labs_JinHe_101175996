@@ -22,7 +22,7 @@ public class BlueSeekAvoid : AgentObject
     new void Start() // Note the new.
     {
         base.Start(); // Explicitly invoking Start of AgentObject.
-        Debug.Log("Starting Starship.");
+        Debug.Log("Starting...");
         rb = GetComponent<Rigidbody2D>();
 
         audioSource = GetComponent<AudioSource>();

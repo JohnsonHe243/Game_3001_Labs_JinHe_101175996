@@ -7,17 +7,16 @@ using UnityEngine;
 public class BlueArrive : AgentObject
 
 {
-    [SerializeField] float movementSpeed = 3;
-    [SerializeField] float rotationSpeed = 60;
+    [SerializeField] float movementSpeed = 3f;
+    [SerializeField] float rotationSpeed = 60f;
     // Add fields for whisper length, angle and avoidance weight.
-    [SerializeField] float whiskerLength = 1.5f;
     [SerializeField] float slowRadius = 1f;
     private Rigidbody2D rb;
 
     new void Start() // Note the new.
     {
         base.Start(); // Explicitly invoking Start of AgentObject.
-        Debug.Log("Starting Starship.");
+        Debug.Log("Starting...");
         rb = GetComponent<Rigidbody2D>();
     }
 

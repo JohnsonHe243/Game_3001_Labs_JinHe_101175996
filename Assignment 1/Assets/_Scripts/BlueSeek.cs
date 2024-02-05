@@ -5,17 +5,14 @@ using UnityEngine;
 
 public class Seek : AgentObject
 {
-    [SerializeField] float movementSpeed;
-    [SerializeField] float rotationSpeed;
-    // Add fields for whisper length, angle and avoidance weight.
-    [SerializeField] float whiskerLength = 1.5f;
-    [SerializeField] float avoidanceWeight = 2f;
+    [SerializeField] float movementSpeed = 3f;
+    [SerializeField] float rotationSpeed = 60f;
     private Rigidbody2D rb;
 
     new void Start() // Note the new.
     {
         base.Start(); // Explicitly invoking Start of AgentObject.
-        Debug.Log("Starting Starship.");
+        Debug.Log("Starting...");
         rb = GetComponent<Rigidbody2D>();
     }
 
