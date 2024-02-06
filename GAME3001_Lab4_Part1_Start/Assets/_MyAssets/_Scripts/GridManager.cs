@@ -24,7 +24,12 @@ public enum NeighbourTile
 public class GridManager : MonoBehaviour
 {
     // Fill in for Lab 4 Part 1.
-    //
+    [SerializeField] private GameObject tilePrefab;
+    [SerializeField] private GameObject 
+    private GameObject[,] grid;
+    private int rows = 12;
+    private int cols = 12;
+
     //
     //
 
@@ -46,7 +51,7 @@ public class GridManager : MonoBehaviour
     private void Initialize()
     {
         // Fill in for Lab 4 Part 1.
-        //
+        BuildGrid();
         //
         //
     }
@@ -62,9 +67,19 @@ public class GridManager : MonoBehaviour
     private void BuildGrid()
     {
         // Fill in for Lab 4 Part 1.
-        //
-        //
-        //
+        grid = new GameObject[rows, cols];
+        int count = 0;
+        float rowPos = 5.5f;
+
+        for(int row  = 0; row < rows; row++, rowPos--)
+        {
+            float colPos = -7.5f;
+            for (int col = 0; col < cols; col++, colPos++) 
+            { 
+                GameObject tileInst = GameObject.Instantiate(tilePrefab, new Vector3(colPos, rowPos, 0f), Quaternion.identity);
+                tileInst.GetComponent<TileScript>().SetColor(colors[System.Convert.ToInt32((count++ % 2 == 0))]);
+            }
+        }
     }
 
     private void ConnectGrid()
