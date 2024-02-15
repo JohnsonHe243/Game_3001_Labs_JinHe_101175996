@@ -27,10 +27,13 @@ public class ClickDragScript : MonoBehaviour
                     currentlyDraggedObject = rb2d;
                     offset = rb2d.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     // Add extra behaviour for mines in Lab 4 part 1.
-                    if (currentlyDraggedObject.gameObject.tag == "Mines")
+                    if (currentlyDraggedObject.gameObject.tag == "Mines" ||
+                        currentlyDraggedObject.gameObject.tag == "Ship" ||
+                        currentlyDraggedObject.gameObject.tag == "Planet")
                     {
-                        Vector2 mineIndex = currentlyDraggedObject.gameObject.GetComponent<NavigationObject>().GetGridIndex();
-                        GridManager.Instance.GetGrid()[(int)mineIndex.x, (int)mineIndex.x].GetComponent<TileScript>().ToggleImpassable();
+                        Vector2 tileIndex = currentlyDraggedObject.gameObject.GetComponent<NavigationObject>().GetGridIndex();
+                        GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.UNVISITED);
+
                     }
                 }
             }
@@ -38,13 +41,21 @@ public class ClickDragScript : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             // Add extra behaviour for mines in Lab 4 part 1.
-            if(currentlyDraggedObject.gameObject.tag == "Mines")
+            if (isDragging) return;
+            Vector2 tileIndex = currentlyDraggedObject.gameObject.GetComponent<NavigationObject>().GetGridIndex();
+
+            if (currentlyDraggedObject.gameObject.tag == "Mines")
             {
-                Vector2 mineIndex = currentlyDraggedObject.gameObject.GetComponent<NavigationObject>().GetGridIndex();
-                GridManager.Instance.GetGrid()[(int)mineIndex.x, (int)mineIndex.x].GetComponent<TileScript>().ToggleImpassable(true);
+                GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.IMPASSABLE);
             }
-            //
-            //
+            else if (currentlyDraggedObject.gameObject.tag == "Ship") // We've realieased a ship tile
+            {
+                GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.START);
+            }
+            else if (currentlyDraggedObject.gameObject.tag == "Planet") // We've released a planet tile
+            {   
+                GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.START);
+            }
             // Stop dragging.
             isDragging = false;
             currentlyDraggedObject = null;
@@ -62,7 +73,7 @@ public class ClickDragScript : MonoBehaviour
                 // Move the dragged GameObject and lock it to a grid position.
                 // Add extra behaviour for lock to grid in Lab 4 part 1.
                 Vector2 gridPosition = GridManager.Instance.GetGridPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-                currentlyDraggedObject.MovePosition(mousePosition + offset);
+                currentlyDraggedObject.MovePosition(gridPosition);
                 //
                 //
             }
