@@ -5,6 +5,6 @@ using UnityEngine;
 
 public class TilePanel : MonoBehaviour
 {
-    public TMP_Text tileStatus;
-    public TMP_Text tileCost;
+    public TMP_Text statusText;
+    public TMP_Text costText;
 }
