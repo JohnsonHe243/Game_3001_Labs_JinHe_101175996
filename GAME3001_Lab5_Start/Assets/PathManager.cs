@@ -5,19 +5,19 @@ using System.Data;
 using System.Xml.XPath;
 using UnityEngine;
 
-public class something()
+public class PathNode
 {
     public GameObject Tile { get; private set; }
     public List<PathManager> connections;
-    
+
     public PathNode(GameObject tile)
-
-    tile = tile;
-    connections = new List<PathManager>();
-
-    PublicAPIAttribute void AddConnection(PathConnection connection)
     {
-        ConnectionState.Add(c);
+        Tile = tile;
+        connections = new List<PathManager>();
+    }
+    public void AddConnection(PathConnection c)
+    {
+        connections.Add(c);
     }
 }
 
@@ -29,7 +29,7 @@ public class PathConnection
 
     public XPathNodeIterator ToNode { get; private set; }
 
-    public PathConnection(XPathNodeIterator from, XPathNodeIterator to, flaot cost = 1f)
+    public PathConnection(XPathNodeIterator from, XPathNodeIterator to, float cost = 1f)
     {
         FromNode = from;
         ToNode = to;
@@ -41,13 +41,13 @@ public class NodeRecord
     public PathNode Node { get; private set; }
     public NodeRecord FromRecord { get; private set; }
 
-    public PathConnection { get; set;}
+    public PathConnection PathConnection { get; set;}
 
     public float CostSoFar { get; set; }
 
-    public NodeRecord(XPathNodeIterator node = null)
+    public NodeRecord(PathNode node = null)
     {
-        node = node;
+        Node = node;
         PathConnection = null;
         FromRecord = null;
         CostSoFar = 0f;
@@ -84,7 +84,7 @@ public class PathManager : MonoBehaviour
     }
 
     // 
-    public void GetShortestPath()
+    public void GetShortestPath(PathNode start, PathNode goal)
     {
         //TODO
     }
