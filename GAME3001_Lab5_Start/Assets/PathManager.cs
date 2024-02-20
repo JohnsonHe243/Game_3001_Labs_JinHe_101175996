@@ -12,7 +12,6 @@ public class PathNode
         Tile = tile;
         connections = new List<PathConnection>();
     }
-
     public void AddConnection(PathConnection c)
     {
         connections.Add(c);
@@ -20,11 +19,9 @@ public class PathNode
 }
 
 [System.Serializable]
-
 public class PathConnection
 {
-    public float Cost { get; set; } //This is a new cost from tile to tile. We'll use distance in units
-
+    public float Cost { get; set; }
     public PathNode FromNode { get; private set; }
 
     public PathNode ToNode { get; private set; }
@@ -36,12 +33,13 @@ public class PathConnection
         Cost = cost;
     }
 }
-
 public class NodeRecord
 {
     public PathNode Node { get; set; }
     public NodeRecord FromRecord { get; set; }
-    public PathConnection PathConnection { get; set; }
+
+    public PathConnection PathConnection { get; set;}
+
     public float CostSoFar { get; set; }
 
     public NodeRecord(PathNode node = null)
@@ -57,21 +55,21 @@ public class PathManager : MonoBehaviour
 {
     public List<NodeRecord> openList;
     public List<NodeRecord> closeList;
+    
+    public List<PathConnection> path; // What will be the shortest path.
 
-    public List<PathConnection> path; //What will be the shortest path
-
-    public static PathManager Instance { get; private set; } // Static object of the class
+    public static PathManager instance { get; private set; } // Static object of the class
 
     private void Awake()
     {
-        if (Instance == null) // If the object/instance doesn't exist yet
+        if(instance == null) // If the object/instance does not exist yet.
         {
-            Instance = this;
+            instance = this;
             Initialize();
         }
         else
         {
-            Destroy(gameObject); //Destroy dublicate instances
+            Destroy(gameObject); // Destroy dublicate instances
         }
     }
 
@@ -82,38 +80,39 @@ public class PathManager : MonoBehaviour
         path = new List<PathConnection>();
     }
 
+    // 
     public void GetShortestPath(PathNode start, PathNode goal)
     {
         //TODO
     }
 
-    //Some utility methods
+    // Some utility methods
 
-    public NodeRecord GetsmallestNode()
+    public NodeRecord GetSmallestNode()
     {
         NodeRecord smallestNode = openList[0];
 
-        //Iterate through the rest f the noderecords in the list
-        for (int i = 1; i < openList.Count; i++)
+        //iterate through the rest of the node records in the list
+        for(int i = 1; i < openList.Count; i++)
         {
-            //If the current NodeRecord has a smaller CostSofar than the smallestNode, update smallestNode with Current NodeRecord
+            // If the current NodeRecord has a smaller CostSoFar than the smallestNode, update smallestNode with current NodeRecord.
             if (openList[i].CostSoFar < smallestNode.CostSoFar)
             {
                 smallestNode = openList[i];
             }
-            // If they're the same, flip a coin
+            // If they are the same flip a coin.
             else if (openList[i].CostSoFar == smallestNode.CostSoFar)
             {
                 smallestNode = (Random.value < 0.5 ? openList[i] : smallestNode);
             }
         }
 
-        return smallestNode; //Return the nodeRecord with the smallest CostSoFar
+        return smallestNode; // Return the NodeRecord with the smallest CostSoFar
     }
 
     public bool ContainsNode(List<NodeRecord> list, PathNode node)
     {
-        foreach (NodeRecord record in list)
+        foreach(NodeRecord record in list)
         {
             if (record.Node == node) return true;
         }
@@ -125,7 +124,7 @@ public class PathManager : MonoBehaviour
     {
         foreach (NodeRecord record in list)
         {
-            if (record.Node == node) return record;
+            if(record.Node == node) return record;
         }
         return null;
     }
