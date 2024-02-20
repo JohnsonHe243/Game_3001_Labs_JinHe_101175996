@@ -8,11 +8,12 @@ public class TileScript : MonoBehaviour
 {
     [SerializeField] private GameObject[] neighbourTiles;
     [SerializeField] private Color original;
+
     public TilePanelScript tilePanel; // Used for UI only.
     public TileStatus status = TileStatus.UNVISITED;
     public float cost = 999.9f;
     
-    public XPathNodeIterator Node {  get; private set; }
+    public PathNode Node {  get; set; }
     public void ResetNeighbourConnections()
     {
         neighbourTiles = new GameObject[4];
@@ -23,7 +24,7 @@ public class TileScript : MonoBehaviour
         neighbourTiles[index] = tile;
     }
 
-    public XPathNodeIterator GetNeighbourTileNode(int index)
+    public PathNode GetNeighbourTileNode(int index)
     {
         return neighbourTiles[index].GetComponent<TileScript>().Node;
     }

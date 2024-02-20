@@ -1,8 +1,5 @@
-using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Xml.XPath;
 using UnityEngine;
 
 public class PathNode
@@ -13,7 +10,7 @@ public class PathNode
     public PathNode(GameObject tile)
     {
         Tile = tile;
-        connections = new List<PathManager>();
+        connections = new List<PathConnection>();
     }
     public void AddConnection(PathConnection c)
     {
@@ -24,12 +21,12 @@ public class PathNode
 [System.Serializable]
 public class PathConnection
 {
-    public float Cost { get; private set; }
-    public XPathNodeIterator FromNode { get; private set; }
+    public float Cost { get; set; }
+    public PathNode FromNode { get; private set; }
 
-    public XPathNodeIterator ToNode { get; private set; }
+    public PathNode ToNode { get; private set; }
 
-    public PathConnection(XPathNodeIterator from, XPathNodeIterator to, float cost = 1f)
+    public PathConnection(PathNode from, PathNode to, float cost = 1f)
     {
         FromNode = from;
         ToNode = to;

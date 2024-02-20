@@ -91,14 +91,14 @@ public class GridManager : MonoBehaviour
         {
             // Get ship
             GameObject ship = GameObject.FindGameObjectWithTag("Ship");
-            Vector2 shipIndices = ship.GetComponet<NavigationObject>.GetGridIndex();
+            Vector2 shipIndices = ship.GetComponent<NavigationObject>().GetGridIndex();
             PathNode start = grid[(int)shipIndices.y, (int)(shipIndices.x)].GetComponent<TileScript>().Node;
             // Get Goal Node
             GameObject planet = GameObject.FindGameObjectWithTag("Planet");
-            Vector2 planetIndices = planet.GetComponent<NavigationObject>.GetGridIndex();
+            Vector2 planetIndices = planet.GetComponent<NavigationObject>().GetGridIndex();
             PathNode goal = grid[(int)planetIndices.y, (int)planetIndices.x].GetComponent<TileScript>().Node;
 
-            PathMangager.Instance.GetShortestPath(start, goal);
+            PathManager.instance.GetShortestPath(start, goal);
 
 
         }
@@ -181,13 +181,18 @@ public class GridManager : MonoBehaviour
                     if (!(grid[row + 1, col].GetComponent<TileScript>().status == TileStatus.IMPASSABLE))
                     {
                         tileScript.SetNeighbourTile((int)NeighbourTile.BOTTOM_TILE, grid[row + 1, col]);
-                        tileScript.Node.AddConnection(new PathConnection(tileScript.Node, grid[row, col + 1].GetComponent<TileScript>().Node,
-                            Vector3.Distance(tileScript.transform.position, grid[row, col + 1].transform.position)));
+                        tileScript.Node.AddConnection(new PathConnection(tileScript.Node, grid[row + 1, col].GetComponent<TileScript>().Node,
+                            Vector3.Distance(tileScript.transform.position, grid[row + 1, col].transform.position)));
                     }
                 }
                 if (col > 0) // Set left neighbour if tile is not in leftmost row.
                 {
-                    tileScript.SetNeighbourTile((int)NeighbourTile.LEFT_TILE, grid[row, col - 1]);
+                    if (!(grid[row, col - 1].GetComponent<TileScript>().status == TileStatus.IMPASSABLE))
+                    {
+                        tileScript.SetNeighbourTile((int)NeighbourTile.LEFT_TILE, grid[row, col - 1]);
+                        tileScript.Node.AddConnection(new PathConnection(tileScript.Node, grid[row, col - 1].GetComponent<TileScript>().Node,
+                            Vector3.Distance(tileScript.transform.position, grid[row, col - 1].transform.position)));
+                    }
                 }
             }
         }
@@ -242,16 +247,16 @@ public class GridManager : MonoBehaviour
         foreach (GameObject mine in mines)
         {
             Vector2 mineIndex = mine.GetComponent<NavigationObject>().GetGridIndex();
-            grid[mineIndex(int)mineIndex.y, (int)mineIndex.x].GetComponent<TileScript>().SetStatus.IMPASSABLE;
+            grid[(int)mineIndex.y, (int)mineIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.IMPASSABLE);
         }
 
-        GameObject ship = GameObject.FindGameObjectsWithTag("Ship");
+        GameObject ship = GameObject.FindGameObjectWithTag("Ship");
         Vector2 shipIndices = ship.GetComponent<NavigationObject>().GetGridIndex();
-        grid[(int)shipIndices.y, (int)shipIndices.x].GetComponent<TileScript>().SetStatus.Start;
+        grid[(int)shipIndices.y, (int)shipIndices.x].GetComponent<TileScript>().SetStatus(TileStatus.START);
 
-        GameObject ship = GameObject.FindGameObjectsWithTag("Ship");
-        Vector2 shipIndices = ship.GetComponent<NavigationObject>().GetGridIndex();
-        grid[(int)shipIndices.y, (int)shipIndices.x].GetComponent<TileScript>().SetStatus.Start;
+        GameObject planet = GameObject.FindGameObjectWithTag("Ship");
+        Vector2 planetIndices = ship.GetComponent<NavigationObject>().GetGridIndex();
+        grid[(int)shipIndices.y, (int)shipIndices.x].GetComponent<TileScript>().SetStatus(TileStatus.GOAL);
     }
 }
 
