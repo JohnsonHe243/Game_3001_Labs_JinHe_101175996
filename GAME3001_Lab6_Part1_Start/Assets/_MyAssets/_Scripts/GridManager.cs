@@ -29,8 +29,11 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject panelParent;
     [SerializeField] private GameObject minePrefab;
     [SerializeField] private Color[] colors;
-    [SerializeField] private float baseTileCost = 1f;
-    [SerializeField] private bool useManhattanHeuristic = true;
+    //[SerializeField] private float baseTileCost = 1f;
+    //[SerializeField] private bool useManhattanHeuristic = true;
+    // New LOS Bool
+    [SerializeField] bool losToShip;
+    [SerializeField] bool losToPlanet;
     
     private GameObject[,] grid;
     private int rows = 12;
@@ -93,7 +96,15 @@ public class GridManager : MonoBehaviour
             // TODO: Comment out for Lab 6a.
             //ConnectGrid();
         }
-        if (Input.GetKeyDown(KeyCode.F)) // Start pathfinding.
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            // Todo check tile LOS
+            CheckTileLOS();
+        }
+        CheckTileLOS();
+
+        /*if (Input.GetKeyDown(KeyCode.F)) // Start pathfinding.
         {
             // Get ship node.
             GameObject ship = GameObject.FindGameObjectWithTag("Ship");
@@ -109,7 +120,7 @@ public class GridManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) // Reset grid/pathfinding.
         {
             SetTileStatuses();
-        }
+        }*/
     }
 
     private void BuildGrid()
@@ -217,7 +228,7 @@ public class GridManager : MonoBehaviour
         return new Vector2(xPos, yPos);
     }
 
-    public void SetTileCosts(Vector2 targetIndices)
+    /*public void SetTileCosts(Vector2 targetIndices)
     {
         float distance = 0f;
         float dx = 0f;
@@ -245,7 +256,7 @@ public class GridManager : MonoBehaviour
                 tileScript.tilePanel.costText.text = tileScript.cost.ToString("F1");
             }
         }
-    }
+    }*/
 
     public void SetTileStatuses()
     {
@@ -266,5 +277,82 @@ public class GridManager : MonoBehaviour
         GameObject planet = GameObject.FindGameObjectWithTag("Planet");
         Vector2 planetIndices = planet.GetComponent<NavigationObject>().GetGridIndex();
         grid[(int)planetIndices.y, (int)planetIndices.x].GetComponent<TileScript>().SetStatus(TileStatus.GOAL);
+    }
+
+    public void CheckTileLOS()
+    {
+        if(!losToPlanet && !losToShip) 
+        {
+            foreach(GameObject go in grid)
+            {
+                if (go == null) continue;
+                go.GetComponent<SpriteRenderer>().color= Color.cyan ;
+            }
+        }
+        else
+        {
+            GameObject ship = GameObject.FindWithTag("Ship");
+            Vector3 shipPos = ship.transform.position;
+            GameObject planet = GameObject.FindWithTag("Planet");
+            Vector3 planetPos = planet.transform.position;
+
+            foreach (GameObject tile in grid)
+            {
+                if (tile == null) continue;
+
+                Vector3 tilePos = tile.transform.position;
+                bool hasLosToShip = false;
+                if(losToShip)
+                {
+                    Vector2 direction = (shipPos - tilePos).normalized;
+                    hasLosToShip= tile.GetComponent<NavigationObject>().HasLOS(tile, "Ship", direction, Vector3.Distance(tilePos,shipPos));
+                }
+
+                bool hasLosToPlanet = false;
+                if(losToPlanet)
+                {
+                    Vector2 direction = (planetPos - tilePos).normalized;
+                    hasLosToPlanet = tile.GetComponent<NavigationObject>().HasLOS(tile, "Planet", direction, Vector3.Distance(tilePos, planetPos));
+                }
+
+                if(losToPlanet && losToShip)
+                {
+                    if(hasLosToPlanet && hasLosToShip)
+                    {
+                        tile.GetComponent<SpriteRenderer>().color = Color.green;
+                    }
+                    else
+                    {
+                        tile.GetComponent<SpriteRenderer>().color = Color.red;
+                    }
+                }
+                else if (losToShip)
+                {
+                    if (hasLosToShip)
+                    {
+                        tile.GetComponent<SpriteRenderer>().color = Color.green;
+
+                    }
+                    else
+                    {
+                        tile.GetComponent<SpriteRenderer>().color = Color.red;
+
+                    }
+                }
+                else if(losToPlanet)
+                {
+                    if (hasLosToPlanet)
+                    {
+                        tile.GetComponent<SpriteRenderer>().color = Color.green;
+                    }
+                    else
+                    {
+                        tile.GetComponent<SpriteRenderer>().color = Color.red;
+
+                    }
+                }
+
+            }
+        }
     }
 }

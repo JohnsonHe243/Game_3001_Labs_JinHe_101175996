@@ -251,8 +251,8 @@ MonoBehaviour:
   colors:
   - {r: 0, g: 0.5019608, b: 0.5019608, a: 0.5019608}
   - {r: 0, g: 0.2509804, b: 0.5019608, a: 0.5019608}
-  baseTileCost: 1
-  useManhattanHeuristic: 1
+  losToShip: 1
+  losToPlanet: 1
 --- !u!4 &571498480
 Transform:
   m_ObjectHideFlags: 0
@@ -384,6 +384,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockToGrid: 1
+--- !u!4 &601117366 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7681081816824406026, guid: 65b303e39d61fdc4fa07687bb9a80558, type: 3}
+  m_PrefabInstance: {fileID: 5632595653976080791}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1407338888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6073611016518656805, guid: c4c5aabf4600a2d4296c618bc89878e7, type: 3}
+  m_PrefabInstance: {fileID: 5703868698390493469}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1407338889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407338888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a39eb3d5a0af1f4ba06e3a6ca705d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_target: {fileID: 601117366}
+  rotationSpeed: 90
+  whiskerLength: 5
+  whiskerAngle: 0
 --- !u!1 &1574120919
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +717,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6073611016518656805, guid: c4c5aabf4600a2d4296c618bc89878e7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1407338889}
   m_SourcePrefab: {fileID: 100100000, guid: c4c5aabf4600a2d4296c618bc89878e7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
