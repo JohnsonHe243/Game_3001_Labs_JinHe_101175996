@@ -8,12 +8,12 @@ public class TileScript : MonoBehaviour
 {
     [SerializeField] private GameObject[] neighbourTiles;
     [SerializeField] private Color original;
-
     public TilePanelScript tilePanel; // Used for UI only.
     public TileStatus status = TileStatus.UNVISITED;
     public float cost = 999.9f;
     
     public PathNode Node {  get; set; }
+
     public void ResetNeighbourConnections()
     {
         neighbourTiles = new GameObject[4];
@@ -48,9 +48,11 @@ public class TileScript : MonoBehaviour
                 tilePanel.statusText.text = "U";
                 break;
             case TileStatus.OPEN:
+                gameObject.GetComponent<SpriteRenderer>().color = original;
                 tilePanel.statusText.text = "O";
                 break;
             case TileStatus.CLOSED:
+                gameObject.GetComponent<SpriteRenderer>().color = original;
                 tilePanel.statusText.text = "C";
                 break;
             case TileStatus.IMPASSABLE:
@@ -66,8 +68,8 @@ public class TileScript : MonoBehaviour
                 tilePanel.statusText.text = "S";
                 break;
             case TileStatus.PATH:
-                gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
-                tilePanel.statusText.text = "p";
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+                tilePanel.statusText.text = "P";
                 break;
         }
     }

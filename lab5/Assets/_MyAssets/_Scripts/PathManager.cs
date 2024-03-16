@@ -51,21 +51,21 @@ public class NodeRecord
         CostSoFar = 0f;
     }
 }
+[System.Serializable]
 
 public class PathManager : MonoBehaviour
 {
     public List<NodeRecord> openList;
     public List<NodeRecord> closeList;
-    
     public List<PathConnection> path; // What will be the shortest path.
 
-    public static PathManager instance { get; private set; } // Static object of the class
+    public static PathManager Instance { get; private set; } // Static object of the class
 
     private void Awake()
     {
-        if(instance == null) // If the object/instance does not exist yet.
+        if(Instance == null) // If the object/instance does not exist yet.
         {
-            instance = this;
+            Instance = this;
             Initialize();
         }
         else
@@ -81,7 +81,6 @@ public class PathManager : MonoBehaviour
         path = new List<PathConnection>();
     }
 
-    // 
     public void GetShortestPath(PathNode start, PathNode goal)
     {
         if(path.Count >0)
@@ -186,7 +185,6 @@ public class PathManager : MonoBehaviour
         {
             if (record.Node == node) return true;
         }
-
         return false;
     }
 

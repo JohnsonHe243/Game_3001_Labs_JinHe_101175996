@@ -12,7 +12,6 @@ public enum TileStatus
     GOAL,
     START,
     PATH
-
 };
 
 public enum NeighbourTile
@@ -75,7 +74,6 @@ public class GridManager : MonoBehaviour
             Vector2 mineIndex = mineInst.GetComponent<NavigationObject>().GetGridIndex();
             grid[(int)mineIndex.y, (int)mineIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.IMPASSABLE);
             mines.Add(mineInst);
-            mines.Clear();
             ConnectGrid();
         }
         if (Input.GetKeyDown(KeyCode.C))
@@ -99,10 +97,8 @@ public class GridManager : MonoBehaviour
             GameObject planet = GameObject.FindGameObjectWithTag("Planet");
             Vector2 planetIndices = planet.GetComponent<NavigationObject>().GetGridIndex();
             PathNode goal = grid[(int)planetIndices.y, (int)planetIndices.x].GetComponent<TileScript>().Node;
-
-            PathManager.instance.GetShortestPath(start, goal);
-
-
+            // Start Algorithm
+            PathManager.Instance.GetShortestPath(start, goal);
         }
 
         if(Input.GetKeyDown(KeyCode.R))
@@ -124,8 +120,10 @@ public class GridManager : MonoBehaviour
                 GameObject tileInst = GameObject.Instantiate(tilePrefab, new Vector3(colPos, rowPos, 0f), Quaternion.identity);
                 TileScript tileScript = tileInst.GetComponent<TileScript>();
                 tileScript.SetColor(colors[System.Convert.ToInt32((count++ % 2 == 0))]);
+               
                 tileInst.transform.parent = transform;
                 grid[row,col] = tileInst;
+                
                 // Instantiate a new TilePanel and link it to the Tile instance.
                 GameObject panelInst = GameObject.Instantiate(tilePanelPrefab, tilePanelPrefab.transform.position, Quaternion.identity);
                 panelInst.transform.SetParent(panelParent.transform);
@@ -133,7 +131,7 @@ public class GridManager : MonoBehaviour
                 panelTransform.localScale = Vector3.one;
                 panelTransform.anchoredPosition = new Vector3(64f * col, -64f * row);
                 tileScript.tilePanel = panelInst.GetComponent<TilePanelScript>();
-                // Create a new PathNode for the new file
+                // Create a new PathNode for the new tile
                 tileScript.Node = new PathNode(tileInst);
             }
             count--;
@@ -256,9 +254,9 @@ public class GridManager : MonoBehaviour
         Vector2 shipIndices = ship.GetComponent<NavigationObject>().GetGridIndex();
         grid[(int)shipIndices.y, (int)shipIndices.x].GetComponent<TileScript>().SetStatus(TileStatus.START);
 
-        GameObject planet = GameObject.FindGameObjectWithTag("Ship");
-        Vector2 planetIndices = ship.GetComponent<NavigationObject>().GetGridIndex();
-        grid[(int)shipIndices.y, (int)shipIndices.x].GetComponent<TileScript>().SetStatus(TileStatus.GOAL);
+        GameObject planet = GameObject.FindGameObjectWithTag("Planet");
+        Vector2 planetIndices = planet.GetComponent<NavigationObject>().GetGridIndex();
+        grid[(int)planetIndices.y, (int)planetIndices.x].GetComponent<TileScript>().SetStatus(TileStatus.GOAL);
     }
 }
 
