@@ -74,12 +74,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: 7482667652216324306, guid: 06f63e56ee49c66499602f63a6c5d629, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 60eea5591427e824b8fd9d348769cc2d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -94,15 +94,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4813588358410622281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbc71d41d95f3924ea0ef7f61621501b, type: 3}
+  m_Script: {fileID: 11500000, guid: 519646667cef84548bb3be6ebfbe2afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neighbourTiles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  neighbourTiles: []
   original: {r: 0, g: 0, b: 0, a: 0}
-  tilePanel: {fileID: 7914234922739767651, guid: 035f4db22f86ab449a23604f6534fc44, type: 3}
+  tilePanel: {fileID: 0}
   status: 0
   cost: 999.9
