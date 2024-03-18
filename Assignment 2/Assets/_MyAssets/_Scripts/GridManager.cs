@@ -34,8 +34,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] private bool useManhattanHeuristic = true;
     
     private GameObject[,] grid;
-    private int rows = 12;
-    private int columns = 16;
+    private int rows = 10;
+    private int columns = 10;
     private List<GameObject> mines = new List<GameObject>();
 
     public static GridManager Instance { get; private set; } // Static object of the class.
@@ -59,32 +59,25 @@ public class GridManager : MonoBehaviour
         ConnectGrid();
     }
 
-    void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        GameObject[] Obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+        foreach (GameObject obstacle in Obstacles)
         {
-            foreach(Transform child in transform)
-                child.gameObject.SetActive(!child.gameObject.activeSelf);
-            panelParent.gameObject.SetActive(!panelParent.gameObject.activeSelf);
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            Vector2 gridPosition = GetGridPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            GameObject mineInst = GameObject.Instantiate(minePrefab, new Vector3(gridPosition.x, gridPosition.y, 0f), Quaternion.identity);
-            Vector2 mineIndex = mineInst.GetComponent<NavigationObject>().GetGridIndex();
+            Vector2 mineIndex = obstacle.GetComponent<NavigationObject>().GetGridIndex();
             grid[(int)mineIndex.y, (int)mineIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.IMPASSABLE);
-            mines.Add(mineInst);
             ConnectGrid();
         }
-        if (Input.GetKeyDown(KeyCode.C))
+    }
+
+    void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            foreach (GameObject mine in mines)
-            {
-                Vector2 mineIndex = mine.GetComponent<NavigationObject>().GetGridIndex();
-                grid[(int)mineIndex.y, (int)mineIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.UNVISITED);
-                Destroy(mine);
-            }
-            mines.Clear();
+            foreach (Transform child in transform)
+                child.gameObject.SetActive(!child.gameObject.activeSelf);
+            panelParent.gameObject.SetActive(!panelParent.gameObject.activeSelf);
         }
 
         if (Input.GetKeyDown (KeyCode.F)) // Start path finding. 
