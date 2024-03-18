@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - GameMusic
+  - Target
+  - Mines
+  - Planet
+  - Ship
   layers:
   - Default
   - TransparentFX
