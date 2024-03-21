@@ -18,36 +18,35 @@ public class PlayerMovement : MonoBehaviour
         bool hitLeft = CastWhisker(leftWhiskerAngle);
         bool hitDown = CastWhisker(downWhiskerAngle);
         bool hitRight = CastWhisker(rightWhiskerAngle);
+        
+        // Change Tile Position when Movement or reset k
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
-            GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.UNVISITED);
+            GridManager.Instance.ResetStartTiles();
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
-            GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.UNVISITED);
-
+            GridManager.Instance.ResetStartTiles();
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
-            GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.UNVISITED);
-            TileScript currentTile = GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>();
-
+            GridManager.Instance.ResetStartTiles();
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
+            GridManager.Instance.ResetStartTiles();
 
-            Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
-            GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.UNVISITED);
-            TileScript currentTile = GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>();
         }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GridManager.Instance.ResetStartTiles();
+            GridManager.Instance.ResetGoalTiles();
+        }
         // Move
 
         if (Input.GetKeyUp(KeyCode.W) && hitUp == false)
@@ -83,8 +82,24 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<NavigationObject>().SetGridIndex();
             Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
             GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.START);
-            TileScript currentTile = GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>();
         }
+
+        // Reset
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            // Moves Player and set tile to player position
+            transform.position = new Vector3(-7.5f, 5.5f, 0f);
+            GetComponent<NavigationObject>().SetGridIndex();
+            Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
+            GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.START);
+
+            // Reset goal mushroom tile
+            GameObject mush = GameObject.FindGameObjectWithTag("Mushroom");
+            mush.GetComponent<NavigationObject>().SetGridIndex();
+            tileIndex = mush.GetComponent<NavigationObject>().GetGridIndex();
+            GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.GOAL);
+        }
+
     }
 
     private bool CastWhisker(float angle)

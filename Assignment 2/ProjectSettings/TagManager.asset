@@ -9,6 +9,8 @@ TagManager:
   - Planet
   - Ship
   - Obstacle
+  - GameMusic
+  - Mushroom
   layers:
   - Default
   - TransparentFX

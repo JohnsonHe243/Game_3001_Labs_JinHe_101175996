@@ -110,26 +110,10 @@ public class GridManager : MonoBehaviour
                 grid[(int)appleIndex.y, (int)appleIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.IMPASSABLE);
             }
             // Keep Status
-            grid[(int)startIndices.y, (int)(startIndices.x)].GetComponent<TileScript>().SetStatus(TileStatus.START);
-            grid[(int)goalIndices.y, (int)goalIndices.x].GetComponent<TileScript>().SetStatus(TileStatus.GOAL);
+            //grid[(int)startIndices.y, (int)(startIndices.x)].GetComponent<TileScript>().SetStatus(TileStatus.START);
+            //grid[(int)goalIndices.y, (int)goalIndices.x].GetComponent<TileScript>().SetStatus(TileStatus.GOAL);
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            Vector2 tileIndex = player.GetComponent<NavigationObject>().GetGridIndex();
-            grid[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.UNVISITED);
-        }
-        // Check for M key press
-        if (Input.GetKeyUp(KeyCode.M))
-        {
-            // Move the player along the path
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            MovePlayer();
-            player.GetComponent<NavigationObject>().SetGridIndex();
-            Vector2 tileIndex = player.GetComponent<NavigationObject>().GetGridIndex();
-            grid[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.START);
-        }
         if (setActive == true)
         {
             Vector2 originalM;
@@ -398,7 +382,7 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    void ResetStartTiles()
+    public void ResetStartTiles()
     {
         for (int i = 0; i < grid.GetLength(0); i++)
         {
@@ -413,7 +397,7 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    void ResetGoalTiles()
+    public void ResetGoalTiles()
     {
         for (int i = 0; i < grid.GetLength(0); i++)
         {
