@@ -92,7 +92,7 @@ public class GridManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F)) // Start path finding. 
         {
 
-            // Get player
+            // Find start tile
             Vector2 startIndices = FindStartTile();
             PathNode start = grid[(int)startIndices.y, (int)(startIndices.x)].GetComponent<TileScript>().Node;
 
@@ -338,50 +338,6 @@ public class GridManager : MonoBehaviour
         grid[(int)mushIndices.y, (int)mushIndices.x].GetComponent<TileScript>().SetStatus(TileStatus.GOAL);
     }
 
-    private void MovePlayer()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        // Ensure there's a path to follow
-        if (path.Count == 0)
-        {
-            Debug.Log("No path to follow.");
-            return;
-        }
-
-        // Ensure the current path index is within bounds
-        if (currentPathIndex < 0 || currentPathIndex >= path.Count)
-        {
-            Debug.Log("Invalid path index.");
-            return;
-        }
-
-        // Get the tile to move to from the current path
-        TileScript nextTile = path[currentPathIndex].ToNode.Tile.GetComponent<TileScript>();
-
-        // Check if the next tile is traversable
-        if (nextTile.status != TileStatus.PATH)
-        {
-            Debug.Log("Cannot move to the next tile.");
-            return;
-        }
-
-        // Move the player to the next tile position
-        Vector3 nextPosition = nextTile.transform.position;
-        // Assuming your player object is called "player"
-        player.transform.position = nextPosition;
-
-        // Increment the path index for the next movement
-        currentPathIndex++;
-
-        // Check if reached the end of the path
-        if (currentPathIndex >= path.Count)
-        {
-            Debug.Log("Reached the end of the path.");
-            // Reset path index for next movement
-            currentPathIndex = 0;
-        }
-    }
-
     public void ResetStartTiles()
     {
         for (int i = 0; i < grid.GetLength(0); i++)
@@ -391,7 +347,7 @@ public class GridManager : MonoBehaviour
                 TileScript tileScript = grid[i, j].GetComponent<TileScript>();
                 if (tileScript.status == TileStatus.START)
                 {
-                    grid[i, j].GetComponent<TileScript>().SetStatus(TileStatus.UNVISITED);
+                    grid[i, j].GetComponent<TileScript>().SetStatus(TileStatus.CLOSED);
                 }
             }
         }
@@ -406,7 +362,7 @@ public class GridManager : MonoBehaviour
                 TileScript tileScript = grid[i, j].GetComponent<TileScript>();
                 if (tileScript.status == TileStatus.GOAL)
                 {
-                    grid[i, j].GetComponent<TileScript>().SetStatus(TileStatus.UNVISITED);
+                    grid[i, j].GetComponent<TileScript>().SetStatus(TileStatus.CLOSED);
                 }
             }
         }

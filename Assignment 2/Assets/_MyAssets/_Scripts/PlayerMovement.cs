@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.W) && hitUp == false)
         {
             transform.Translate(Vector3.up * stepSize);
-            GetComponent<NavigationObject>().SetGridIndex();
+            //GetComponent<NavigationObject>().SetGridIndex();
             Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
             GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.START);
         }
@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.S) && hitDown == false)
         {
             transform.Translate(Vector3.down * stepSize);
-            GetComponent<NavigationObject>().SetGridIndex();
+            //GetComponent<NavigationObject>().SetGridIndex();
             Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
             GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.START);
         }
@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.A) && hitLeft == false)
         {
             transform.Translate(Vector3.left * stepSize);
-            GetComponent<NavigationObject>().SetGridIndex();
+            //GetComponent<NavigationObject>().SetGridIndex();
             Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
             GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.START);
         }
@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.D) && hitRight == false)
         {
             transform.Translate(Vector3.right * stepSize);
-            GetComponent<NavigationObject>().SetGridIndex();
+            //GetComponent<NavigationObject>().SetGridIndex();
             Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
             GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.START);
         }
@@ -89,15 +89,25 @@ public class PlayerMovement : MonoBehaviour
         {
             // Moves Player and set tile to player position
             transform.position = new Vector3(-7.5f, 5.5f, 0f);
-            GetComponent<NavigationObject>().SetGridIndex();
+            //GetComponent<NavigationObject>().SetGridIndex();
             Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
             GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.START);
 
             // Reset goal mushroom tile
             GameObject mush = GameObject.FindGameObjectWithTag("Mushroom");
-            mush.GetComponent<NavigationObject>().SetGridIndex();
+            //mush.GetComponent<NavigationObject>().SetGridIndex();
             tileIndex = mush.GetComponent<NavigationObject>().GetGridIndex();
             GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.GOAL);
+        }
+        // Move along the path when pressed M
+        if (Input.GetKeyUp(KeyCode.M)) // Reset start tile to CLOSED
+        {
+            GridManager.Instance.ResetStartTiles();
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
+            GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].status;
         }
 
     }
