@@ -100,15 +100,15 @@ public class PlayerMovement : MonoBehaviour
             GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].GetComponent<TileScript>().SetStatus(TileStatus.GOAL);
         }
         // Move along the path when pressed M
-        if (Input.GetKeyUp(KeyCode.M)) // Reset start tile to CLOSED
-        {
-            GridManager.Instance.ResetStartTiles();
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
-            GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].status;
-        }
+        //if (Input.GetKeyUp(KeyCode.M)) // Reset start tile to CLOSED
+        //{
+        //    GridManager.Instance.ResetStartTiles();
+        //}
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    Vector2 tileIndex = GetComponent<NavigationObject>().GetGridIndex();
+        //    GridManager.Instance.GetGrid()[(int)tileIndex.y, (int)tileIndex.x].status;
+        //}
 
     }
 

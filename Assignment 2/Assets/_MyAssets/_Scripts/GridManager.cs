@@ -26,7 +26,6 @@ public enum NeighbourTile
 public class GridManager : MonoBehaviour
 {
     private List<PathConnection> path = new List<PathConnection>();
-    private int currentPathIndex = 0; // Track the index of the current tile in the path
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject tilePanelPrefab;
     [SerializeField] private GameObject panelParent;
