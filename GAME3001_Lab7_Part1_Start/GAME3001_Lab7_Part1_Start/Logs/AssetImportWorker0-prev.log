@@ -1,23 +1,23 @@
 Using pre-set license
 Built from '2022.3/staging' branch; Version is '2022.3.14f1 (eff2de9070d8) revision 15725278'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 10  (10.0.19045) 64bit Core' Language: 'en' Physical Memory: 16340 MB
+OS: 'Windows 11  (10.0.22631) 64bit Core' Language: 'en' Physical Memory: 16215 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
-D:\Program Files\Unity\2022.3.14f1\Editor\Unity.exe
+C:\Program Files\Unity 2022.3.14f1\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker0
 -projectPath
-D:/_/__Unity_Projects/GAME3001/GAME3001_Lab7_Part1_Start
+C:/Users/jinhe/OneDrive/Desktop/Game_3001_Labs_JinHe_101175996/GAME3001_Lab7_Part1_Start/GAME3001_Lab7_Part1_Start
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-49516
-Successfully changed project path to: D:/_/__Unity_Projects/GAME3001/GAME3001_Lab7_Part1_Start
-D:/_/__Unity_Projects/GAME3001/GAME3001_Lab7_Part1_Start
+63027
+Successfully changed project path to: C:/Users/jinhe/OneDrive/Desktop/Game_3001_Labs_JinHe_101175996/GAME3001_Lab7_Part1_Start/GAME3001_Lab7_Part1_Start
+C:/Users/jinhe/OneDrive/Desktop/Game_3001_Labs_JinHe_101175996/GAME3001_Lab7_Part1_Start/GAME3001_Lab7_Part1_Start
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-bucket-allocator-granularity=16"
     "memorysetup-bucket-allocator-bucket-count=8"
@@ -49,65 +49,68 @@ D:/_/__Unity_Projects/GAME3001/GAME3001_Lab7_Part1_Start
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [22340] Host "[IP] 192.168.2.113 [Port] 0 [Flags] 2 [Guid] 3961431295 [EditorId] 3961431295 [Version] 1048832 [Id] WindowsEditor(7,TITANDRAGON) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [18852] Host "[IP] 10.0.224.191 [Port] 0 [Flags] 2 [Guid] 3256143367 [EditorId] 3256143367 [Version] 1048832 [Id] WindowsEditor(7,ACE) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [22340] Host "[IP] 192.168.2.113 [Port] 0 [Flags] 2 [Guid] 3961431295 [EditorId] 3961431295 [Version] 1048832 [Id] WindowsEditor(7,TITANDRAGON) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [18852] Host "[IP] 10.0.224.191 [Port] 0 [Flags] 2 [Guid] 3256143367 [EditorId] 3256143367 [Version] 1048832 [Id] WindowsEditor(7,ACE) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-[Physics::Module] Initialized MultithreadedJobDispatcher with 7 workers.
-Refreshing native plugins compatible for Editor in 435.40 ms, found 4 plugins.
+[Physics::Module] Initialized MultithreadedJobDispatcher with 11 workers.
+Refreshing native plugins compatible for Editor in 16.29 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.14f1 (eff2de9070d8)
-[Subsystems] Discovering subsystems at path D:/Program Files/Unity/2022.3.14f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path D:/_/__Unity_Projects/GAME3001/GAME3001_Lab7_Part1_Start/Assets
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity 2022.3.14f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/jinhe/OneDrive/Desktop/Game_3001_Labs_JinHe_101175996/GAME3001_Lab7_Part1_Start/GAME3001_Lab7_Part1_Start/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce GTX 1070 (ID=0x1be1)
+    Renderer: NVIDIA GeForce RTX 2060 (ID=0x1f15)
     Vendor:   NVIDIA
-    VRAM:     8075 MB
-    Driver:   31.0.15.4608
+    VRAM:     5980 MB
+    Driver:   27.21.14.5167
+Shader 'TextMeshPro/Distance Field SSD': fallback shader 'TextMeshPro/Mobile/Distance Field' not found
+Shader 'TextMeshPro/Distance Field': fallback shader 'TextMeshPro/Mobile/Distance Field' not found
+Shader 'TextMeshPro/Distance Field Overlay': fallback shader 'TextMeshPro/Mobile/Distance Field' not found
 Initialize mono
-Mono path[0] = 'D:/Program Files/Unity/2022.3.14f1/Editor/Data/Managed'
-Mono path[1] = 'D:/Program Files/Unity/2022.3.14f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
-Mono config path = 'D:/Program Files/Unity/2022.3.14f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56684
+Mono path[0] = 'C:/Program Files/Unity 2022.3.14f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity 2022.3.14f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity 2022.3.14f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56484
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: D:/Program Files/Unity/2022.3.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.031895 seconds.
-- Loaded All Assemblies, in  1.378 seconds
+Register platform support module: C:/Program Files/Unity 2022.3.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.007309 seconds.
+- Loaded All Assemblies, in  0.482 seconds
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.435 seconds
-Domain Reload Profiling: 1813ms
-	BeginReloadAssembly (888ms)
+- Finished resetting the current domain, in  0.351 seconds
+Domain Reload Profiling: 830ms
+	BeginReloadAssembly (158ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (62ms)
-	RebuildNativeTypeToScriptingClass (20ms)
-	initialDomainReloadingComplete (116ms)
-	LoadAllAssembliesAndSetupDomain (291ms)
-		LoadAssemblies (888ms)
+		CreateAndSetChildDomain (2ms)
+	RebuildCommonClasses (46ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (75ms)
+	LoadAllAssembliesAndSetupDomain (186ms)
+		LoadAssemblies (153ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (288ms)
-			TypeCache.Refresh (286ms)
-				TypeCache.ScanAssembly (257ms)
-			ScanForSourceGeneratedMonoScriptInfo (1ms)
+		AnalyzeDomain (183ms)
+			TypeCache.Refresh (181ms)
+				TypeCache.ScanAssembly (164ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
 			ResolveRequiredComponents (1ms)
-	FinalizeReload (436ms)
+	FinalizeReload (351ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (318ms)
+		SetupLoadedEditorAssemblies (274ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (18ms)
-			SetLoadedEditorAssemblies (14ms)
+			InitializePlatformSupportModulesInManaged (11ms)
+			SetLoadedEditorAssemblies (10ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (3ms)
-			ProcessInitializeOnLoadAttributes (188ms)
-			ProcessInitializeOnLoadMethodAttributes (94ms)
+			ProcessInitializeOnLoadAttributes (183ms)
+			ProcessInitializeOnLoadMethodAttributes (67ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -115,59 +118,58 @@ Domain Reload Profiling: 1813ms
 ========================================================================
 Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  2.536 seconds
-Refreshing native plugins compatible for Editor in 8.49 ms, found 4 plugins.
+- Loaded All Assemblies, in  0.905 seconds
+Refreshing native plugins compatible for Editor in 8.75 ms, found 4 plugins.
 Native extension for WindowsStandalone target not found
 Package Manager log level set to [2]
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.309 seconds
-Domain Reload Profiling: 3798ms
-	BeginReloadAssembly (255ms)
+- Finished resetting the current domain, in  0.814 seconds
+Domain Reload Profiling: 1715ms
+	BeginReloadAssembly (200ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (9ms)
+		DisableScriptedObjects (7ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (32ms)
-	RebuildCommonClasses (69ms)
-	RebuildNativeTypeToScriptingClass (23ms)
-	initialDomainReloadingComplete (68ms)
-	LoadAllAssembliesAndSetupDomain (2073ms)
-		LoadAssemblies (1872ms)
+		CreateAndSetChildDomain (27ms)
+	RebuildCommonClasses (50ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (56ms)
+	LoadAllAssembliesAndSetupDomain (580ms)
+		LoadAssemblies (453ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (352ms)
-			TypeCache.Refresh (287ms)
-				TypeCache.ScanAssembly (257ms)
-			ScanForSourceGeneratedMonoScriptInfo (48ms)
-			ResolveRequiredComponents (14ms)
-	FinalizeReload (1309ms)
+		AnalyzeDomain (242ms)
+			TypeCache.Refresh (205ms)
+				TypeCache.ScanAssembly (184ms)
+			ScanForSourceGeneratedMonoScriptInfo (27ms)
+			ResolveRequiredComponents (8ms)
+	FinalizeReload (815ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1007ms)
+		SetupLoadedEditorAssemblies (604ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (9ms)
-			SetLoadedEditorAssemblies (7ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			SetLoadedEditorAssemblies (4ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (204ms)
-			ProcessInitializeOnLoadAttributes (723ms)
-			ProcessInitializeOnLoadMethodAttributes (59ms)
-			AfterProcessingInitializeOnLoad (5ms)
+			BeforeProcessingInitializeOnLoad (91ms)
+			ProcessInitializeOnLoadAttributes (438ms)
+			ProcessInitializeOnLoadMethodAttributes (55ms)
+			AfterProcessingInitializeOnLoad (8ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (14ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.52 seconds
-Refreshing native plugins compatible for Editor in 6.43 ms, found 4 plugins.
+		AwakeInstancesAfterBackupRestoration (8ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
+Refreshing native plugins compatible for Editor in 9.39 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4052 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 64 unused Assets / (61.1 KB). Loaded Objects now: 4513.
-Memory consumption went from 148.5 MB to 148.4 MB.
-Total: 4.644200 ms (FindLiveObjects: 0.493200 ms CreateObjectMapping: 0.417300 ms MarkObjects: 3.588700 ms  DeleteObjects: 0.144000 ms)
+Unloading 64 unused Assets / (61.0 KB). Loaded Objects now: 4513.
+Memory consumption went from 148.4 MB to 148.3 MB.
+Total: 5.376200 ms (FindLiveObjects: 0.521800 ms CreateObjectMapping: 0.429600 ms MarkObjects: 4.261400 ms  DeleteObjects: 0.161100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
   custom:CustomObjectIndexerAttribute: 756ad292c208cfabdd7b50bc23989ffe -> 
@@ -179,139 +181,3 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 25100.811666 seconds.
-  path: Assets/_MyAssets/_Scripts/AgentObject.cs
-  artifactKey: Guid(362ac1a2a870ec449b1abc801d28e356) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/AgentObject.cs using Guid(362ac1a2a870ec449b1abc801d28e356) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '74faf3a2bf6c74a17f61d84ac99ca3c2') in 0.003765 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 373.836299 seconds.
-  path: Assets/_MyAssets/_Scripts/AgentObject.cs
-  artifactKey: Guid(362ac1a2a870ec449b1abc801d28e356) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/AgentObject.cs using Guid(362ac1a2a870ec449b1abc801d28e356) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0018a02ee96cd389f642ad0e80ef81b5') in 0.108658 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 27.450332 seconds.
-  path: Assets/_MyAssets/_Scripts/Starship.cs
-  artifactKey: Guid(1a39eb3d5a0af1f4ba06e3a6ca705d69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/Starship.cs using Guid(1a39eb3d5a0af1f4ba06e3a6ca705d69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3d613b2070156e57f533749b51ecc5f8') in 0.000562 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 205.363350 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/DecisionTree.cs
-  artifactKey: Guid(fb3ce4cf9db16074fb1b7f8b069788ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/DecisionTree.cs using Guid(fb3ce4cf9db16074fb1b7f8b069788ae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ffef4c3aff79af41bfe07d9aaaf9b7c') in 0.000648 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 0.580009 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/TreeNode.cs
-  artifactKey: Guid(68fb8685f3766ce4caad2549941f902f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/TreeNode.cs using Guid(68fb8685f3766ce4caad2549941f902f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7845a45e184b1c4339e255b08a0701be') in 0.000457 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 7.008526 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/Actions/ActionNode.cs
-  artifactKey: Guid(93a92ce19a1bc1441b68901e13b2eedc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/Actions/ActionNode.cs using Guid(93a92ce19a1bc1441b68901e13b2eedc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '53e2c6c10c5dbdc06bc4025c1c6d29e9') in 0.001031 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 4.134503 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/Conditions/ConditionNode.cs
-  artifactKey: Guid(d76e2bca398199b41be03dd64e8ce815) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/Conditions/ConditionNode.cs using Guid(d76e2bca398199b41be03dd64e8ce815) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '45238cfb7329eb43bcefa2111609982c') in 0.000489 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 18.604825 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/Actions/AttackAction.cs
-  artifactKey: Guid(7dd7c26058e4c88449264d154035e4df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/Actions/AttackAction.cs using Guid(7dd7c26058e4c88449264d154035e4df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2eaf23804518113b6fe488c75ba1ea31') in 0.000504 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 3.070807 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/Actions/MoveToLOSAction.cs
-  artifactKey: Guid(963a8c46076d58c45bdd8abf1bfee307) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/Actions/MoveToLOSAction.cs using Guid(963a8c46076d58c45bdd8abf1bfee307) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '355ea4518a8b4a686eb6ae83a57597dc') in 0.000604 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 4.303571 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/Actions/MoveToPlayerAction.cs
-  artifactKey: Guid(f02c5ed1be3bf834db254b8cfc2501d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/Actions/MoveToPlayerAction.cs using Guid(f02c5ed1be3bf834db254b8cfc2501d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b5f6a07b537fe4e88d3662a006a9bea0') in 0.000608 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 2.097874 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/Actions/PatrolAction.cs
-  artifactKey: Guid(288e7657fd0cfd54a89f184a1557639c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/Actions/PatrolAction.cs using Guid(288e7657fd0cfd54a89f184a1557639c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a3874e2c538d6851bc2fe293333f6c73') in 0.000442 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 64.340757 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/Actions/PatrolAction.cs
-  artifactKey: Guid(288e7657fd0cfd54a89f184a1557639c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/Actions/PatrolAction.cs using Guid(288e7657fd0cfd54a89f184a1557639c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e23efb69b609fac9d5691b69d20ff763') in 0.011814 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 4.536582 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/Conditions/LOSCondition.cs
-  artifactKey: Guid(ba74993fc56a9164f904a1598bf226ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/Conditions/LOSCondition.cs using Guid(ba74993fc56a9164f904a1598bf226ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '685efc94da8f582cb1b457261aeab142') in 0.000751 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 2.592713 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/Conditions/RadiusCondition.cs
-  artifactKey: Guid(8cc760e8bd7855e45b03057645de6819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/Conditions/RadiusCondition.cs using Guid(8cc760e8bd7855e45b03057645de6819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2532c88cfb4d9634f8a31ddc76670667') in 0.000462 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 27.141562 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/Conditions/RadiusCondition.cs
-  artifactKey: Guid(8cc760e8bd7855e45b03057645de6819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/Conditions/RadiusCondition.cs using Guid(8cc760e8bd7855e45b03057645de6819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'efcf2b5e3c8653666863a9b8f40a5488') in 0.017609 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 4.258928 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/Conditions/LOSCondition.cs
-  artifactKey: Guid(ba74993fc56a9164f904a1598bf226ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/Conditions/LOSCondition.cs using Guid(ba74993fc56a9164f904a1598bf226ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '875332aef92c7b47ebeeccc01c3e39e4') in 0.000452 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
-========================================================================
-Received Import Request.
-  Time since last request: 4.425843 seconds.
-  path: Assets/_MyAssets/_Scripts/DecisionTree/Conditions/CloseCombatCondition.cs
-  artifactKey: Guid(12537f855ad57974a88fad07a5fd1097) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/_MyAssets/_Scripts/DecisionTree/Conditions/CloseCombatCondition.cs using Guid(12537f855ad57974a88fad07a5fd1097) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '89a06b6fd041638e815a21c4dc635fe6') in 0.000528 seconds
-Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 0
