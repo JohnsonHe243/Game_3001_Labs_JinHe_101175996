@@ -7,14 +7,15 @@ public class Starship : AgentObject
 {
     [SerializeField] Transform[] patrolPoints;
     [SerializeField] float pointRadius;
-    [SerializeField] float movementSpeed; // TODO: Uncomment for Lab 7a.
+
+    [SerializeField] float movementSpeed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float whiskerLength;
     [SerializeField] float whiskerAngle;
     // [SerializeField] float avoidanceWeight;
     private Rigidbody2D rb;
     private NavigationObject no;
-    // Decision Tree. TODO: Add for Lab 7a.
+    // Decision Tree.
     private DecisionTree dt;
     private int patrolIndex; 
     [SerializeField] Transform testTarget; // Planet to seek.
@@ -45,7 +46,6 @@ public class Starship : AgentObject
 
         // Using Decision tree to seek temporarily to the target (planet).
         dt.RadiusNode.IsWithinRadius = Vector3.Distance(transform.position, testTarget.position) <= 3f;
-
         dt.MakeDecision();
         switch (state)
         {
@@ -164,22 +164,19 @@ public class Starship : AgentObject
         // Second level.
 
         // PatrolAction leaf.
-        TreeNode patrolNode = dt.AddNode(dt.RadiusNode, new PatrolAction(),
-            TreeNodeType.LEFT_TREE_NODE);
+        TreeNode patrolNode = dt.AddNode(dt.RadiusNode, new PatrolAction(), TreeNodeType.LEFT_TREE_NODE);
         ((ActionNode)patrolNode).Agent = this.gameObject;
         dt.treeNodeList.Add(patrolNode);
 
         // LOSCondition node.
         dt.LOSNode = new LOSCondition();
-        dt.treeNodeList.Add(dt.AddNode(dt.RadiusNode, dt.LOSNode,
-            TreeNodeType.RIGHT_TREE_NODE));
+        dt.treeNodeList.Add(dt.AddNode(dt.RadiusNode, dt.LOSNode, TreeNodeType.RIGHT_TREE_NODE));
 
         // Third level.
 
         // MoveToLOSAction leaf.
-        TreeNode MoveToLOSNode = dt.AddNode(dt.LOSNode, new MoveToLOSAction(),
-            TreeNodeType.RIGHT_TREE_NODE);
-        ((ActionNode)patrolNode).Agent = this.gameObject;
+        TreeNode MoveToLOSNode = dt.AddNode(dt.LOSNode, new MoveToLOSAction(), TreeNodeType.LEFT_TREE_NODE);
+        ((ActionNode)MoveToLOSNode).Agent = this.gameObject;
         dt.treeNodeList.Add(MoveToLOSNode);
 
         // CloseCombatCondition node.

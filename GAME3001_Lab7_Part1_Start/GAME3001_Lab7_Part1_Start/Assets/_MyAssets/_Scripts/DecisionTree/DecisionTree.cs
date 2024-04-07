@@ -20,8 +20,7 @@ public class DecisionTree
         TreeNode currentNode = treeNodeList[0];
         while (!currentNode.isLeaf)
         {
-            currentNode = ((ConditionNode)currentNode).Condition()
-                ? currentNode.right : currentNode.left;
+            currentNode = ((ConditionNode)currentNode).Condition()? currentNode.right : currentNode.left;
         }
         ((ActionNode)currentNode).Action();
     }
