@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class Starship : AgentObject
 {
-    // TODO: Add for Lab 7a.
-    //
-    //
+    [SerializeField] Transform[] patrolPoints;
+    [SerializeField] float pointRadius;
     [SerializeField] float movementSpeed; // TODO: Uncomment for Lab 7a.
     [SerializeField] float rotationSpeed;
     [SerializeField] float whiskerLength;
@@ -16,9 +15,9 @@ public class Starship : AgentObject
     private Rigidbody2D rb;
     private NavigationObject no;
     // Decision Tree. TODO: Add for Lab 7a.
-    //
-    //
-    //
+    private DecisionTree dt;
+    private int patrolIndex; 
+    [SerializeField] Transform testTarget; // Planet to seek.
 
     new void Start() // Note the new.
     {
@@ -27,9 +26,9 @@ public class Starship : AgentObject
         rb = GetComponent<Rigidbody2D>();
         no = GetComponent<NavigationObject>();
         // TODO: Add for Lab 7a.
-        //
-        //
-        //
+        dt = new DecisionTree(this.gameObject);
+        BuildTree();
+        patrolIndex = 0;
     }
 
     void Update()
@@ -44,16 +43,20 @@ public class Starship : AgentObject
         //    AvoidObstacles();
         //}
 
-        // TODO: Add for Lab 7a. Add seek target for tree temporarily to planet.
-        //
+        // Using Decision tree to seek temporarily to the target (planet).
+        dt.RadiusNode.IsWithinRadius = Vector3.Distance(transform.position, testTarget.position) <= 3f;
 
-        // TODO: Update for Lab 7a.
-        // 
-        // 
-        //
-        //
-        //
-        //
+        dt.MakeDecision();
+        switch (state)
+        {
+            case ActionState.PATROL:
+                SeekForward();
+                break;
+            // TODO: other actions later.
+            default: // Just for now. Immediately stop the ship or it will keep going.
+                rb.velocity = Vector3.zero;
+                break;
+        }
     }
 
     //private void AvoidObstacles()
@@ -124,25 +127,24 @@ public class Starship : AgentObject
         // Move along the forward vector using Rigidbody2D.
         rb.velocity = transform.up * movementSpeed;
 
-        // TODO: New for Lab 7a. Continue patrol.
-        //
-        //
-        //
+        // Continue patrol.
+        if (Vector3.Distance(transform.position, TargetPosition) <= pointRadius)
+        {
+            m_target = GetNextPatrolPoint();
+        }
     }
-
-    // TODO: Add for Lab 7a.
     public void StartPatrol()
     {
-        //
+        m_target = patrolPoints[patrolIndex];
     }
-
-    // TODO: Add for Lab 7a.
     private Transform GetNextPatrolPoint()
     {
-        //
-        //
-        //
-        //
+        patrolIndex++;
+        if (patrolIndex >= patrolPoints.Length)
+        {
+            patrolIndex = 0;
+        }    
+        return patrolPoints[patrolIndex];
     }
 
     //private void OnTriggerEnter2D(Collider2D other)
@@ -153,45 +155,50 @@ public class Starship : AgentObject
     //    }
     //}
 
-    // TODO: Fill in for Lab 7a.
     private void BuildTree()
     {
         // Root condition node.
-        //
-        //
+        dt.RadiusNode = new RadiusCondition();
+        dt.treeNodeList.Add(dt.RadiusNode);
 
         // Second level.
 
         // PatrolAction leaf.
-        //
-        //
-        //
+        TreeNode patrolNode = dt.AddNode(dt.RadiusNode, new PatrolAction(),
+            TreeNodeType.LEFT_TREE_NODE);
+        ((ActionNode)patrolNode).Agent = this.gameObject;
+        dt.treeNodeList.Add(patrolNode);
 
         // LOSCondition node.
-        //
-        //
+        dt.LOSNode = new LOSCondition();
+        dt.treeNodeList.Add(dt.AddNode(dt.RadiusNode, dt.LOSNode,
+            TreeNodeType.RIGHT_TREE_NODE));
 
         // Third level.
 
         // MoveToLOSAction leaf.
-        //
-        //
-        //
+        TreeNode MoveToLOSNode = dt.AddNode(dt.LOSNode, new MoveToLOSAction(),
+            TreeNodeType.RIGHT_TREE_NODE);
+        ((ActionNode)patrolNode).Agent = this.gameObject;
+        dt.treeNodeList.Add(MoveToLOSNode);
 
         // CloseCombatCondition node.
-        //
-        //
+        dt.CloseCombatNode = new CloseCombatCondition();
+        dt.treeNodeList.Add(dt.AddNode(dt.LOSNode, dt.CloseCombatNode,
+            TreeNodeType.RIGHT_TREE_NODE));
 
         // Fourth level.
 
         // MoveToPlayerAction leaf.
-        //
-        //
-        //
+        TreeNode MoveToPlayerNode = dt.AddNode(dt.CloseCombatNode, new MoveToPlayerAction(),
+            TreeNodeType.LEFT_TREE_NODE);
+        ((ActionNode)MoveToPlayerNode).Agent = this.gameObject;
+        dt.treeNodeList.Add(MoveToPlayerNode);
 
         // AttackAction leaf.
-        //
-        //
-        //
+        TreeNode AttackNode = dt.AddNode(dt.CloseCombatNode, new AttackAction(),
+            TreeNodeType.RIGHT_TREE_NODE);
+        ((ActionNode)AttackNode).Agent = this.gameObject;
+        dt.treeNodeList.Add(AttackNode);
     }
 }
