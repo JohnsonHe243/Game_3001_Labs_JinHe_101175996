@@ -63,6 +63,7 @@
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Actions\ActionNode.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Actions\MoveToLOSAction.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\NavigationObject.cs" />
+    <Compile Include="Assets\_MyAssets\_Scripts\Game.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\PathManager.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\DecisionTree.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Conditions\CloseCombatCondition.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Conditions\LOSCondition.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\GridManager.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\SceneLoader.cs" />
+    <Compile Include="Assets\_MyAssets\_Scripts\SoundManager.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\TileScript.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\TreeNode.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Actions\MoveToPlayerAction.cs" />
