@@ -20,7 +20,7 @@ public class MoveToRangeAction : ActionNode
             // Custom actions.
             if (AgentScript is RangedCombatEnemy rce)
             {
-                rce.StartPatrol();
+
             }
         }
         // Action in everyframe.

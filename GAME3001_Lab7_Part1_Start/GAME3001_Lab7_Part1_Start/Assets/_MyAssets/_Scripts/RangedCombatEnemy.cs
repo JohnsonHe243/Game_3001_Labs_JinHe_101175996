@@ -160,7 +160,7 @@ public class RangedCombatEnemy : AgentObject
     {
         // Root condition node.
         dt.HealthNode = new HealthCondition();
-        dt.treeNodeList.Add(dt.RadiusNode);
+        dt.treeNodeList.Add(dt.HealthNode);
 
         // Second level.
 
@@ -201,7 +201,7 @@ public class RangedCombatEnemy : AgentObject
 
         // Fifth level.
 
-        // MoveToLOSAction Node Leaf.
+        // MoveToLOSAction Leaf.
         TreeNode moveToLOSNode = dt.AddNode(dt.LOSNode, new MoveToLOSAction(), TreeNodeType.LEFT_TREE_NODE);
         ((ActionNode)moveToLOSNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
         dt.treeNodeList.Add(moveToLOSNode);
@@ -214,7 +214,7 @@ public class RangedCombatEnemy : AgentObject
 
         // MoveToRangeAction leaf.
         TreeNode moveToRangeNode = dt.AddNode(dt.RangedCombatNode, new MoveToRangeAction(), TreeNodeType.LEFT_TREE_NODE);
-        ((ActionNode)moveToRangeNode).SetAgent(this.gameObject, typeof (RangedCombatEnemy));
+        ((ActionNode)moveToRangeNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
         dt.treeNodeList.Add(moveToRangeNode);
 
         // AttackAction leaf.

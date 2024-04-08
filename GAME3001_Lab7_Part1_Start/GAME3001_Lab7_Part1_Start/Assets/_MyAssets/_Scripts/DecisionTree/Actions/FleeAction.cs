@@ -18,7 +18,6 @@ public class FleeAction : ActionNode
             ao.state = ActionState.FLEE;
 
             // Custom actions.
-
             if (AgentScript is RangedCombatEnemy rce)
             {
 
