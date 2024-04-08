@@ -12,13 +12,21 @@ public class AttackAction : ActionNode
     public override void Action()
     {
         // Enter action functionality.
-        if (Agent.GetComponent<Starship>().state != ActionState.ATTACK)
+        if (Agent.GetComponent<AgentObject>().state != ActionState.ATTACK)
         {
             Debug.Log("Starting " + name);
-            Starship ss = Agent.GetComponent<Starship>();
-            ss.state = ActionState.ATTACK;
+            AgentObject ao = Agent.GetComponent<AgentObject>();
+            ao.state = ActionState.ATTACK;
 
             // Custom actions.
+            if (AgentScript is CloseCombatEnemy cce)
+            {
+
+            }
+            else if (AgentScript is RangedCombatEnemy rce)
+            {
+
+            }
         }
         // Every frame.
         Debug.Log("Performing " + name);

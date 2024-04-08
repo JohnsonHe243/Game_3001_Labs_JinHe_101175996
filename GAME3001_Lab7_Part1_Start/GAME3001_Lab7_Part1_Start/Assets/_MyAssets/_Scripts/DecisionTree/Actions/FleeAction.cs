@@ -2,29 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolAction : ActionNode
+public class MoveToRangeAction : ActionNode
 {
-    public PatrolAction()
+    public MoveToRangeAction()
     {
-        name = "Patrol Action";
+        name = "Flee Action";
     }
     public override void Action()
     {
         // Enter action function.
-        if (Agent.GetComponent<AgentObject>().state != ActionState.PATROL)
+        if (Agent.GetComponent<AgentObject>().state != ActionState.FLEE)
         {
             Debug.Log("Starting " + name);
             AgentObject ao = Agent.GetComponent<AgentObject>();
-            ao.state = ActionState.PATROL;
+            ao.state = ActionState.FLEE;
 
             // Custom actions.
-            if (AgentScript is CloseCombatEnemy cce)
+
+            if (AgentScript is RangedCombatEnemy rce)
             {
-                cce.StartPatrol();
-            }
-            else if (AgentScript is RangedCombatEnemy rce)
-            {
-                rce.StartPatrol();
+
             }
         }
         // Action in everyframe.

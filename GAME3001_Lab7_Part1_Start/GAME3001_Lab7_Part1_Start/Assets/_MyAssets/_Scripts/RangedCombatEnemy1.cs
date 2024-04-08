@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Starship : AgentObject
+public class RangedCombatEnemy : AgentObject
 {
     [SerializeField] Transform[] patrolPoints;
     [SerializeField] float pointRadius;
@@ -23,7 +23,7 @@ public class Starship : AgentObject
     new void Start() // Note the new.
     {
         base.Start(); // Explicitly invoking Start of AgentObject.
-        Debug.Log("Starting Starship.");
+        Debug.Log("Starting Ranged Combat Enemy.");
         rb = GetComponent<Rigidbody2D>();
         no = GetComponent<NavigationObject>();
         // TODO: Add for Lab 7a.
