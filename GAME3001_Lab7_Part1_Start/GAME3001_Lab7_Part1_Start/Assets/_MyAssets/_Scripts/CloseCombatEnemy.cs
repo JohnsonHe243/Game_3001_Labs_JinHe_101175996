@@ -12,6 +12,8 @@ public class CloseCombatEnemy : AgentObject
     [SerializeField] float rotationSpeed;
     [SerializeField] float whiskerLength;
     [SerializeField] float whiskerAngle;
+
+    [SerializeField] float detectRange;
     // [SerializeField] float avoidanceWeight;
     private Rigidbody2D rb;
     private NavigationObject no;
@@ -34,6 +36,11 @@ public class CloseCombatEnemy : AgentObject
 
     void Update()
     {
+        Vector2 direction = (testTarget.position - transform.position).normalized;
+        float angleInRadians = Mathf.Atan2(direction.y, direction.x);
+        whiskerAngle = angleInRadians * Mathf.Rad2Deg;
+        bool hit = CastWhisker(whiskerAngle, Color.red);
+
         // bool hit = CastWhisker(whiskerAngle, Color.red);
         // transform.Rotate(0f, 0f, Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
 
@@ -44,9 +51,10 @@ public class CloseCombatEnemy : AgentObject
         //    AvoidObstacles();
         //}
 
-        // Using Decision tree to seek temporarily to the target (planet).
-        dt.RadiusNode.IsWithinRadius = Vector3.Distance(transform.position, testTarget.position) <= 3f;
+        dt.RadiusNode.IsWithinRadius = Vector3.Distance(transform.position, testTarget.position) <= detectRange;
+        dt.LOSNode.HasLOS = hit;
         dt.MakeDecision();
+
         switch (state)
         {
             case ActionState.PATROL:
@@ -96,9 +104,9 @@ public class CloseCombatEnemy : AgentObject
         Color rayColor = color;
 
         // Calculate the direction of the whisker.
-        Vector2 whiskerDirection = Quaternion.Euler(0, 0, angle) * transform.right;
+        Vector2 whiskerDirection = Quaternion.Euler(0, 0, angle) * Vector2.right;
 
-        if (no.HasLOS(gameObject, "Planet", whiskerDirection, whiskerLength))
+        if (no.HasLOS(gameObject, "Player", whiskerDirection, whiskerLength))
         {
             // Debug.Log("Obstacle detected!");
             rayColor = Color.green;
