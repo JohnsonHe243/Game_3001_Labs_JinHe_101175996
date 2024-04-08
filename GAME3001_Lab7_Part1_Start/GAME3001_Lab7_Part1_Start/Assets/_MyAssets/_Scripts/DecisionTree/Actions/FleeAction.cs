@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveToRangeAction : ActionNode
+public class FleeAction : ActionNode
 {
-    public MoveToRangeAction()
+    public FleeAction()
     {
         name = "Flee Action";
     }

@@ -64,6 +64,7 @@
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Conditions\HealthCondition.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Actions\ActionNode.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Actions\MoveToLOSAction.cs" />
+    <Compile Include="Assets\_MyAssets\_Scripts\RangedCombatEnemy.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\NavigationObject.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\Game.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\PathManager.cs" />
@@ -72,7 +73,6 @@
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Actions\MoveToRangeAction.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\SceneChangeButton.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Actions\FleeAction.cs" />
-    <Compile Include="Assets\_MyAssets\_Scripts\RangedCombatEnemy1.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Conditions\ConditionNode.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Conditions\RadiusCondition.cs" />
     <Compile Include="Assets\_MyAssets\_Scripts\DecisionTree\Conditions\RangedCombatCondition.cs" />

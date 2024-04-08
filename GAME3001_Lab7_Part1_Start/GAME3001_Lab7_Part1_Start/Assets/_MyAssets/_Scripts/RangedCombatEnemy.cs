@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class RangedCombatEnemy : AgentObject
 {
@@ -158,44 +159,68 @@ public class RangedCombatEnemy : AgentObject
     private void BuildTree()
     {
         // Root condition node.
-        dt.RadiusNode = new RadiusCondition();
+        dt.HealthNode = new HealthCondition();
         dt.treeNodeList.Add(dt.RadiusNode);
 
         // Second level.
 
-        // PatrolAction leaf.
-        TreeNode patrolNode = dt.AddNode(dt.RadiusNode, new PatrolAction(), TreeNodeType.LEFT_TREE_NODE);
-        ((ActionNode)patrolNode).Agent = this.gameObject;
-        dt.treeNodeList.Add(patrolNode);
+        // FleeAction leaf.
+        TreeNode FleeNode = dt.AddNode(dt.HealthNode, new FleeAction(), TreeNodeType.LEFT_TREE_NODE);
+        ((ActionNode)FleeNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
+        dt.treeNodeList.Add(FleeNode);
 
-        // LOSCondition node.
-        dt.LOSNode = new LOSCondition();
-        dt.treeNodeList.Add(dt.AddNode(dt.RadiusNode, dt.LOSNode, TreeNodeType.RIGHT_TREE_NODE));
+        // HitCondition node.
+        dt.HitNode = new HitCondition();
+        dt.treeNodeList.Add(dt.AddNode(dt.HealthNode, dt.HitNode, TreeNodeType.RIGHT_TREE_NODE));
 
         // Third level.
 
-        // MoveToLOSAction leaf.
-        TreeNode MoveToLOSNode = dt.AddNode(dt.LOSNode, new MoveToLOSAction(), TreeNodeType.LEFT_TREE_NODE);
-        ((ActionNode)MoveToLOSNode).Agent = this.gameObject;
-        dt.treeNodeList.Add(MoveToLOSNode);
+        // Radius Condition
+        dt.RadiusNode = new RadiusCondition();
+        dt.treeNodeList.Add(dt.AddNode(dt.HitNode, dt.RadiusNode, TreeNodeType.LEFT_TREE_NODE));
 
-        // CloseCombatCondition node.
-        dt.CloseCombatNode = new CloseCombatCondition();
-        dt.treeNodeList.Add(dt.AddNode(dt.LOSNode, dt.CloseCombatNode,
-            TreeNodeType.RIGHT_TREE_NODE));
+        // TODO: Other LOS
+        //
 
         // Fourth level.
 
-        // MoveToPlayerAction leaf.
-        TreeNode MoveToPlayerNode = dt.AddNode(dt.CloseCombatNode, new MoveToPlayerAction(),
+        // PatrolAction leaf.
+        TreeNode patrolNode = dt.AddNode(dt.RadiusNode, new PatrolAction(),
             TreeNodeType.LEFT_TREE_NODE);
-        ((ActionNode)MoveToPlayerNode).Agent = this.gameObject;
-        dt.treeNodeList.Add(MoveToPlayerNode);
+        ((ActionNode)patrolNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
+        dt.treeNodeList.Add(patrolNode);
+
+        // LOS Condition node
+        dt.LOSNode = new LOSCondition();
+        dt.treeNodeList.Add(dt.AddNode(dt.RadiusNode, dt.LOSNode, TreeNodeType.RIGHT_TREE_NODE));
+
+        // TODO WaitBehindCover Node to be done later
+        //
+        // TODO MoveToCover Node to be done later
+        //
+
+        // Fifth level.
+
+        // MoveToLOSAction Node Leaf.
+        TreeNode moveToLOSNode = dt.AddNode(dt.LOSNode, new MoveToLOSAction(), TreeNodeType.LEFT_TREE_NODE);
+        ((ActionNode)moveToLOSNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
+        dt.treeNodeList.Add(moveToLOSNode);
+
+        // RangedCombatCondition node.
+        dt.RangedCombatNode = new RangedCombatCondition();
+        dt.treeNodeList.Add(dt.AddNode(dt.LOSNode, dt.RangedCombatNode, TreeNodeType.RIGHT_TREE_NODE));
+
+        // Sixth level.
+
+        // MoveToRangeAction leaf.
+        TreeNode moveToRangeNode = dt.AddNode(dt.RangedCombatNode, new MoveToRangeAction(), TreeNodeType.LEFT_TREE_NODE);
+        ((ActionNode)moveToRangeNode).SetAgent(this.gameObject, typeof (RangedCombatEnemy));
+        dt.treeNodeList.Add(moveToRangeNode);
 
         // AttackAction leaf.
-        TreeNode AttackNode = dt.AddNode(dt.CloseCombatNode, new AttackAction(),
-            TreeNodeType.RIGHT_TREE_NODE);
-        ((ActionNode)AttackNode).Agent = this.gameObject;
-        dt.treeNodeList.Add(AttackNode);
+        TreeNode attackNode = dt.AddNode(dt.RangedCombatNode, new AttackAction(), TreeNodeType.RIGHT_TREE_NODE);
+        ((ActionNode)attackNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
+        dt.treeNodeList.Add(attackNode);
+
     }
 }
