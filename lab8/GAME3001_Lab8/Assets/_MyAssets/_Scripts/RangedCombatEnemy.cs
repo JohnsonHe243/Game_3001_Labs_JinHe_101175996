@@ -284,7 +284,7 @@ public class RangedCombatEnemy : AgentObject
     {
         readyToFire = false;
         Game.Instance.SOMA.PlaySound("Torpedo_k");
-        Invoke("ReloadTropedo", torpedoCooldown);
+        Invoke("ReloadTorpedo", torpedoCooldown);
         GameObject torpedoInst = GameObject.Instantiate(torpedoPrefab, transform.position, Quaternion.identity);
         torpedoInst.GetComponent<EnemyTorpedoScript>().LockOnTarget(testTarget);
         Destroy(torpedoInst, torpedoLifespan);
