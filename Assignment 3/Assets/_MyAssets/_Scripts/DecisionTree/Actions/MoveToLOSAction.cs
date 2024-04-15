@@ -19,7 +19,7 @@ public class MoveToLOSAction : ActionNode
             // Custom actions.
             if (AgentScript is RangedCombatEnemy rce)
             {
-
+                rce.SeekForward();
             }
         }
         // Action in everyframe.

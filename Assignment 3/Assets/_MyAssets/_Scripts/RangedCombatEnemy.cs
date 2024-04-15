@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Android;
-
+using TMPro;
 public class RangedCombatEnemy : AgentObject
 {
     [SerializeField] Transform[] patrolPoints;
@@ -14,7 +14,11 @@ public class RangedCombatEnemy : AgentObject
     [SerializeField] float whiskerLength;
     [SerializeField] float whiskerAngle;
 
-    [SerializeField] float detectRange;
+    [SerializeField] TMP_Text enemyState;
+    [SerializeField] TMP_Text timeText;
+
+
+    [SerializeField] float detectRange = 0;
 
     // [SerializeField] float avoidanceWeight;
     private Rigidbody2D rb;
@@ -23,6 +27,9 @@ public class RangedCombatEnemy : AgentObject
     private DecisionTree dt;
     private int patrolIndex; 
     [SerializeField] Transform testTarget; // Planet to seek.
+
+    private bool patrol = false;
+    private float timer;
 
     new void Start() // Note the new.
     {
@@ -34,71 +41,74 @@ public class RangedCombatEnemy : AgentObject
         dt = new DecisionTree(this.gameObject);
         BuildTree();
         patrolIndex = 0;
+
+        timer = UnityEngine.Random.Range(6f, 10f);
     }
 
     void Update()
     {
+
+
+        bool hit = false;
+        // Calculate direction vector from enemy to target (player)
         Vector2 direction = (testTarget.position - transform.position).normalized;
-        float angleInRadians = Mathf.Atan2(direction.y, direction.x);
-        whiskerAngle = angleInRadians * Mathf.Rad2Deg;
-        bool hit = CastWhisker(whiskerAngle, Color.red);
 
-        // bool hit = CastWhisker(whiskerAngle, Color.red);
-        // transform.Rotate(0f, 0f, Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
+        // Calculate the angle between the direction vector and the ship's forward direction
+        float angleToPlayer = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        //if (TargetPosition != null)
-        //{
-        //    // Seek();
-        //    SeekForward();
-        //    AvoidObstacles();
-        //}
+        // Calculate the angle of the ship's rotation
+        float shipRotation = transform.eulerAngles.z;
 
-        // Using Decision tree to seek temporarily to the target (player).
-        dt.RadiusNode.IsWithinRadius = Vector3.Distance(transform.position, testTarget.position) <= detectRange;
+        // Calculate the difference in angle between the ship's rotation and the angle to the player
+        float angleDifference = Mathf.DeltaAngle(shipRotation, angleToPlayer);
+
+        // Check if the player is within the front 180 degrees of the ship
+        if (angleDifference <= 180 && angleDifference >=0)
+        {
+            // Draw the whisker (or perform any action related to it)
+            hit = CastWhisker(angleToPlayer, Color.red);
+        }
+
+        if (hit == true)
+        {
+            enemyState.text = "Enenmy is Moving Towards Player!";
+        }
+        else if (hit == false && patrol == false)
+        {
+            enemyState.text = "Enemy is in Idle.";
+        }
+        else if (hit == false && patrol == true)
+        {
+            enemyState.text = "Enemy is in Patrol";
+        }    
+        
+        timeText.text = "Changing to Idle/Patrol in " + timer.ToString("F2") + "s" ;
+
         dt.LOSNode.HasLOS = hit;
+        dt.PatrolNode.IsPatrolling = patrol;
+
         dt.MakeDecision();
         switch (state)
-        {
+        { 
             case ActionState.PATROL:
                 SeekForward();
                 break;
-            // TODO: other actions later.
-            default: // Just for now. Immediately stop the ship or it will keep going.
+            case ActionState.IDLE:
                 rb.velocity = Vector3.zero;
                 break;
+            case ActionState.MOVE_TO_LOS:
+                SeekForward();
+                break;
+        }
+
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            patrol = !patrol;
+            timer = UnityEngine.Random.Range(6f, 10f);
         }
     }
-
-    //private void AvoidObstacles()
-    //{
-    //    // Cast whiskers to detect obstacles
-    //    bool hitLeft = CastWhisker(whiskerAngle, Color.red);
-    //    bool hitRight = CastWhisker(-whiskerAngle, Color.blue);
-
-    //    // Adjust rotation based on detected obstacles
-    //    if (hitLeft)
-    //    {
-    //        // Rotate counterclockwise if the left whisker hit
-    //        RotateClockwise();
-    //    }
-    //    else if (hitRight && !hitLeft)
-    //    {
-    //        // Rotate clockwise if the right whisker hit
-    //        RotateCounterClockwise();
-    //    }
-    //}
-
-    //private void RotateCounterClockwise()
-    //{
-    //    // Rotate counterclockwise based on rotationSpeed and a weight.
-    //    transform.Rotate(Vector3.forward, rotationSpeed * avoidanceWeight * Time.deltaTime);
-    //}
-
-    //private void RotateClockwise()
-    //{
-    //    // Rotate clockwise based on rotationSpeed.
-    //    transform.Rotate(Vector3.forward, -rotationSpeed * avoidanceWeight * Time.deltaTime);
-    //}
 
     private bool CastWhisker(float angle, Color color)
     {
@@ -120,7 +130,7 @@ public class RangedCombatEnemy : AgentObject
         return hitResult;
     }
 
-    private void SeekForward() // A seek with rotation to target but only moving along forward vector.
+    public void SeekForward() // A seek with rotation to target but only moving along forward vector.
     {
         // Calculate direction to the target.
         Vector2 directionToTarget = (TargetPosition - transform.position).normalized;
@@ -141,6 +151,10 @@ public class RangedCombatEnemy : AgentObject
         if (Vector3.Distance(transform.position, TargetPosition) <= pointRadius)
         {
             m_target = GetNextPatrolPoint();
+        }
+        else if (Vector3.Distance(transform.position, testTarget.position) <= whiskerLength)
+        {
+            m_target = testTarget;
         }
     }
     public void StartPatrol()
@@ -167,69 +181,33 @@ public class RangedCombatEnemy : AgentObject
 
     private void BuildTree()
     {
-        // Root condition node.
-        dt.HealthNode = new HealthCondition();
-        dt.treeNodeList.Add(dt.HealthNode);
-
-        // Second level.
-
-        // FleeAction leaf.
-        TreeNode FleeNode = dt.AddNode(dt.HealthNode, new FleeAction(), TreeNodeType.LEFT_TREE_NODE);
-        ((ActionNode)FleeNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
-        dt.treeNodeList.Add(FleeNode);
-
-        // HitCondition node.
-        dt.HitNode = new HitCondition();
-        dt.treeNodeList.Add(dt.AddNode(dt.HealthNode, dt.HitNode, TreeNodeType.RIGHT_TREE_NODE));
-
-        // Third level.
-
-        // Radius Condition
-        dt.RadiusNode = new RadiusCondition();
-        dt.treeNodeList.Add(dt.AddNode(dt.HitNode, dt.RadiusNode, TreeNodeType.LEFT_TREE_NODE));
-
-        // TODO: Other LOS
-        //
-
-        // Fourth level.
-
-        // PatrolAction leaf.
-        TreeNode patrolNode = dt.AddNode(dt.RadiusNode, new PatrolAction(),
-            TreeNodeType.LEFT_TREE_NODE);
-        ((ActionNode)patrolNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
-        dt.treeNodeList.Add(patrolNode);
-
         // LOS Condition node
         dt.LOSNode = new LOSCondition();
-        dt.treeNodeList.Add(dt.AddNode(dt.RadiusNode, dt.LOSNode, TreeNodeType.RIGHT_TREE_NODE));
+        dt.treeNodeList.Add(dt.LOSNode);
 
-        // TODO WaitBehindCover Node to be done later
-        //
-        // TODO MoveToCover Node to be done later
-        //
-
-        // Fifth level.
+        // First level.
 
         // MoveToLOSAction Leaf.
-        TreeNode moveToLOSNode = dt.AddNode(dt.LOSNode, new MoveToLOSAction(), TreeNodeType.LEFT_TREE_NODE);
+        TreeNode moveToLOSNode = dt.AddNode(dt.LOSNode, new MoveToLOSAction(), TreeNodeType.RIGHT_TREE_NODE);
         ((ActionNode)moveToLOSNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
         dt.treeNodeList.Add(moveToLOSNode);
 
-        // RangedCombatCondition node.
-        dt.RangedCombatNode = new RangedCombatCondition();
-        dt.treeNodeList.Add(dt.AddNode(dt.LOSNode, dt.RangedCombatNode, TreeNodeType.RIGHT_TREE_NODE));
+        // Patrol Condition node
+        dt.PatrolNode = new PatrolCondition();
+        dt.treeNodeList.Add(dt.AddNode(dt.LOSNode, dt.PatrolNode, TreeNodeType.LEFT_TREE_NODE));
 
-        // Sixth level.
+        // Second level.
 
-        // MoveToRangeAction leaf.
-        TreeNode moveToRangeNode = dt.AddNode(dt.RangedCombatNode, new MoveToRangeAction(), TreeNodeType.LEFT_TREE_NODE);
-        ((ActionNode)moveToRangeNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
-        dt.treeNodeList.Add(moveToRangeNode);
+        // PatrolAction leaf.
+        TreeNode patrolNode = dt.AddNode(dt.PatrolNode, new PatrolAction(),
+            TreeNodeType.RIGHT_TREE_NODE);
+        ((ActionNode)patrolNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
+        dt.treeNodeList.Add(patrolNode);
 
-        // AttackAction leaf.
-        TreeNode attackNode = dt.AddNode(dt.RangedCombatNode, new AttackAction(), TreeNodeType.RIGHT_TREE_NODE);
-        ((ActionNode)attackNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
-        dt.treeNodeList.Add(attackNode);
-
+        // IdleAction leaf
+        TreeNode idleNode = dt.AddNode(dt.PatrolNode, new IdleAction(),
+            TreeNodeType.LEFT_TREE_NODE);
+        ((ActionNode)idleNode).SetAgent(this.gameObject, typeof(RangedCombatEnemy));
+        dt.treeNodeList.Add(idleNode);
     }
 }

@@ -6,12 +6,9 @@ using UnityEngine;
 public enum ActionState
 {
     NO_ACTION = -1,
-    ATTACK, 
-    FLEE,
+    IDLE,
     MOVE_TO_LOS,
-    MOVE_TO_PLAYER,
-    MOVE_TO_RANGE,
-    PATROL
+    PATROL,
 };
 
 public class AgentObject : MonoBehaviour
