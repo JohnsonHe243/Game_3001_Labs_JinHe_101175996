@@ -18,11 +18,7 @@ public class PatrolAction : ActionNode
             ao.state = ActionState.PATROL;
 
             // Custom actions.
-            if (AgentScript is CloseCombatEnemy cce)
-            {
-                cce.StartPatrol();
-            }
-            else if (AgentScript is RangedCombatEnemy rce)
+        if (AgentScript is RangedCombatEnemy rce)
             {
                 rce.StartPatrol();
             }

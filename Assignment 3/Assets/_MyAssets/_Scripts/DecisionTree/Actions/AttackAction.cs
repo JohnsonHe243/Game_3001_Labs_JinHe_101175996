@@ -19,11 +19,7 @@ public class AttackAction : ActionNode
             ao.state = ActionState.ATTACK;
 
             // Custom actions.
-            if (AgentScript is CloseCombatEnemy cce)
-            {
-
-            }
-            else if (AgentScript is RangedCombatEnemy rce)
+             if (AgentScript is RangedCombatEnemy rce)
             {
 
             }

@@ -857,6 +857,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2017817344615377944, guid: 70cf47e0db878524688cd46fa4a15f5d, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017817344615377944, guid: 70cf47e0db878524688cd46fa4a15f5d, type: 3}
       propertyPath: m_target
       value: 
       objectReference: {fileID: 300906214}
@@ -864,6 +868,10 @@ PrefabInstance:
       propertyPath: testTarget
       value: 
       objectReference: {fileID: 300906214}
+    - target: {fileID: 2017817344615377944, guid: 70cf47e0db878524688cd46fa4a15f5d, type: 3}
+      propertyPath: combatRange
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2017817344615377944, guid: 70cf47e0db878524688cd46fa4a15f5d, type: 3}
       propertyPath: detectRange
       value: 6
@@ -877,7 +885,19 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2017817344615377944, guid: 70cf47e0db878524688cd46fa4a15f5d, type: 3}
+      propertyPath: torpedoPrefab
+      value: 
+      objectReference: {fileID: 7266754505629536518, guid: b258f621648253147a09186562e3fb11, type: 3}
+    - target: {fileID: 2017817344615377944, guid: 70cf47e0db878524688cd46fa4a15f5d, type: 3}
       propertyPath: whiskerLength
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017817344615377944, guid: 70cf47e0db878524688cd46fa4a15f5d, type: 3}
+      propertyPath: torpedoCooldown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017817344615377944, guid: 70cf47e0db878524688cd46fa4a15f5d, type: 3}
+      propertyPath: torpedoLifespan
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2017817344615377944, guid: 70cf47e0db878524688cd46fa4a15f5d, type: 3}

@@ -17,11 +17,7 @@ public class MoveToLOSAction : ActionNode
             AgentObject ao = Agent.GetComponent<AgentObject>();
             ao.state = ActionState.MOVE_TO_LOS;
             // Custom actions.
-            if (AgentScript is CloseCombatEnemy cce)
-            {
-
-            }
-            else if (AgentScript is RangedCombatEnemy rce)
+            if (AgentScript is RangedCombatEnemy rce)
             {
 
             }

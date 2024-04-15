@@ -18,7 +18,7 @@ public class MoveToPlayerAction : ActionNode
             ao.state = ActionState.MOVE_TO_PLAYER;
 
             // Custom actions.
-            if (AgentScript is CloseCombatEnemy cce)
+            if (AgentScript is RangedCombatEnemy rce)
             {
 
             }
