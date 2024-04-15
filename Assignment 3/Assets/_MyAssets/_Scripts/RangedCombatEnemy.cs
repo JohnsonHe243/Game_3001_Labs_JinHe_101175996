@@ -16,9 +16,7 @@ public class RangedCombatEnemy : AgentObject
 
     [SerializeField] TMP_Text enemyState;
     [SerializeField] TMP_Text timeText;
-
-
-    [SerializeField] float detectRange = 0;
+    [SerializeField] TMP_Text failCountText;
 
     // [SerializeField] float avoidanceWeight;
     private Rigidbody2D rb;
@@ -28,7 +26,10 @@ public class RangedCombatEnemy : AgentObject
     private int patrolIndex; 
     [SerializeField] Transform testTarget; // Planet to seek.
 
-    private bool patrol = false;
+    int randomCount = 0;
+    bool hit = false;
+    public bool patrol = false;
+    public bool compare;
     private float timer;
 
     new void Start() // Note the new.
@@ -42,14 +43,11 @@ public class RangedCombatEnemy : AgentObject
         BuildTree();
         patrolIndex = 0;
 
-        timer = UnityEngine.Random.Range(6f, 10f);
+        timer = UnityEngine.Random.Range(3f, 5f);
     }
 
     void Update()
     {
-
-
-        bool hit = false;
         // Calculate direction vector from enemy to target (player)
         Vector2 direction = (testTarget.position - transform.position).normalized;
 
@@ -102,12 +100,29 @@ public class RangedCombatEnemy : AgentObject
         }
 
         timer -= Time.deltaTime;
-
+        
         if (timer <= 0)
         {
-            patrol = !patrol;
-            timer = UnityEngine.Random.Range(6f, 10f);
+            bool random;
+            random = UnityEngine.Random.Range(0, 2) == 0;
+            if (patrol == random && randomCount < 4)
+            {
+                patrol = random;
+                randomCount++;
+            }
+            else if (patrol == random && randomCount < 4)
+            {
+                patrol = !patrol;
+                randomCount = 0;
+            }
+            else if (patrol != random)
+            {
+                patrol = random;
+                randomCount = 0;
+            }
+            timer = UnityEngine.Random.Range(3f, 5f); 
         }
+        failCountText.text = "Random Fail Count (switches state at 4): " + (randomCount).ToString();
     }
 
     private bool CastWhisker(float angle, Color color)
@@ -171,13 +186,20 @@ public class RangedCombatEnemy : AgentObject
         return patrolPoints[patrolIndex];
     }
 
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.gameObject.tag == "Target")
-    //    {
-    //        GetComponent<AudioSource>().Play();
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player") 
+        {
+            if(hit == true)
+            {
+                SceneLoader.LoadSceneByIndex(2);
+            }
+            else if(hit == false)
+            {
+                SceneLoader.LoadSceneByIndex(3);
+            }
+        }
+    }
 
     private void BuildTree()
     {
