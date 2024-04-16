@@ -30,6 +30,8 @@ public class Game : MonoBehaviour
         SOMA.AddSound("Alert", Resources.Load<AudioClip>("alert"), SoundManager.SoundType.SOUND_SFX);
         SOMA.AddSound("Patrol", Resources.Load<AudioClip>("patrol"), SoundManager.SoundType.SOUND_SFX);
         SOMA.AddSound("Idle", Resources.Load<AudioClip>("idle"), SoundManager.SoundType.SOUND_SFX);
+        SOMA.AddSound("Victory", Resources.Load<AudioClip>("victory"), SoundManager.SoundType.SOUND_SFX);
+        SOMA.AddSound("Defeat", Resources.Load<AudioClip>("defeat"), SoundManager.SoundType.SOUND_SFX);
         SOMA.AddSound("Upbeat", Resources.Load<AudioClip>("upbeat"), SoundManager.SoundType.SOUND_MUSIC);
         SOMA.PlayMusic("Upbeat");
     }

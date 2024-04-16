@@ -31,7 +31,8 @@ public class RangedCombatEnemy : AgentObject
     public bool patrol = false;
     public bool compare;
     private float timer;
-    private bool hitLast;
+    private bool hitLast = false;
+    private bool patrolLast = false;
 
     new void Start() // Note the new.
     {
@@ -105,7 +106,7 @@ public class RangedCombatEnemy : AgentObject
             Game.Instance.SOMA.PlaySound("Alert");
             hitLast = true;
         }
-        else if (!hit)
+        else if (!hit && hitLast)
         {
             Game.Instance.SOMA.PlaySound("Alert");
             hitLast = false;
@@ -124,34 +125,38 @@ public class RangedCombatEnemy : AgentObject
                 timer = UnityEngine.Random.Range(3f, 5f);
 
             }
-            else if (patrol == random && randomCount == 3)
+            if (patrol == random && randomCount == 3)
             {
                 patrol = !patrol;
                 // SFX
-                if (patrol == true)
+                if (patrol && !patrolLast)
                 {
                     Game.Instance.SOMA.PlaySound("Patrol");
+                    patrolLast = true;
                 }
-                else if (patrol == false)
+                if (!patrol && patrolLast)
                 {
                     Game.Instance.SOMA.PlaySound("Idle");
+                    patrolLast = false;
                 }
                 randomCount = 0;
                 timer = UnityEngine.Random.Range(3f, 5f);
 
             }
-            else if (patrol != random)
+            if (patrol != random)
             {
 
                 patrol = random;
                 // SFX
-                if (patrol == true)
+                if (patrol && !patrolLast)
                 {
                     Game.Instance.SOMA.PlaySound("Patrol");
+                    patrolLast = true;
                 }
-                else if (patrol == false)
+                if (!patrol && patrolLast)
                 {
                     Game.Instance.SOMA.PlaySound("Idle");
+                    patrolLast = false;
                 }
                 randomCount = 0;
                 timer = UnityEngine.Random.Range(3f, 5f);
@@ -228,10 +233,13 @@ public class RangedCombatEnemy : AgentObject
         {
             if(hit == true)
             {
+                Game.Instance.SOMA.PlaySound("Defeat");
                 SceneLoader.LoadSceneByIndex(2);
+
             }
             else if(hit == false)
             {
+                Game.Instance.SOMA.PlaySound("Victory");
                 SceneLoader.LoadSceneByIndex(3);
             }
         }
