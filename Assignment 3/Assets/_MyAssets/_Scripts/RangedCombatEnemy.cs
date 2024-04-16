@@ -31,6 +31,7 @@ public class RangedCombatEnemy : AgentObject
     public bool patrol = false;
     public bool compare;
     private float timer;
+    private bool hitLast;
 
     new void Start() // Note the new.
     {
@@ -99,30 +100,65 @@ public class RangedCombatEnemy : AgentObject
                 break;
         }
 
+        if (hit && !hitLast)
+        {
+            Game.Instance.SOMA.PlaySound("Alert");
+            hitLast = true;
+        }
+        else if (!hit)
+        {
+            Game.Instance.SOMA.PlaySound("Alert");
+            hitLast = false;
+        }
+
         timer -= Time.deltaTime;
         
         if (timer <= 0)
         {
-            bool random;
-            random = UnityEngine.Random.Range(0, 2) == 0;
-            if (patrol == random && randomCount < 4)
+            bool random = UnityEngine.Random.Range(0, 2) == 0 ? false : true;
+
+            if (patrol == random && randomCount < 3)
             {
                 patrol = random;
                 randomCount++;
+                timer = UnityEngine.Random.Range(3f, 5f);
+
             }
-            else if (patrol == random && randomCount < 4)
+            else if (patrol == random && randomCount == 3)
             {
                 patrol = !patrol;
+                // SFX
+                if (patrol == true)
+                {
+                    Game.Instance.SOMA.PlaySound("Patrol");
+                }
+                else if (patrol == false)
+                {
+                    Game.Instance.SOMA.PlaySound("Idle");
+                }
                 randomCount = 0;
+                timer = UnityEngine.Random.Range(3f, 5f);
+
             }
             else if (patrol != random)
             {
+
                 patrol = random;
+                // SFX
+                if (patrol == true)
+                {
+                    Game.Instance.SOMA.PlaySound("Patrol");
+                }
+                else if (patrol == false)
+                {
+                    Game.Instance.SOMA.PlaySound("Idle");
+                }
                 randomCount = 0;
+                timer = UnityEngine.Random.Range(3f, 5f);
+
             }
-            timer = UnityEngine.Random.Range(3f, 5f); 
         }
-        failCountText.text = "Random Fail Count (switches state at 4): " + (randomCount).ToString();
+        failCountText.text = "Random Fail Save Count (switches state at 3): " + (randomCount).ToString();
     }
 
     private bool CastWhisker(float angle, Color color)

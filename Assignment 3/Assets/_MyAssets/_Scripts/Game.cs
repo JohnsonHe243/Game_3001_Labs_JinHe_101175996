@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
-    public static Game Instance { get; private set; } // Static object of the class.
+    public static Game Instance { get; set; } // Static object of the class.
     public SoundManager SOMA;
 
     private void Awake() // Ensure there is only one instance.
@@ -27,6 +27,9 @@ public class Game : MonoBehaviour
     {
         SOMA = new SoundManager();
         SOMA.Initialize(gameObject);
+        SOMA.AddSound("Alert", Resources.Load<AudioClip>("alert"), SoundManager.SoundType.SOUND_SFX);
+        SOMA.AddSound("Patrol", Resources.Load<AudioClip>("patrol"), SoundManager.SoundType.SOUND_SFX);
+        SOMA.AddSound("Idle", Resources.Load<AudioClip>("idle"), SoundManager.SoundType.SOUND_SFX);
         SOMA.AddSound("Upbeat", Resources.Load<AudioClip>("upbeat"), SoundManager.SoundType.SOUND_MUSIC);
         SOMA.PlayMusic("Upbeat");
     }
